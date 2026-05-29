@@ -1,35 +1,259 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>deema ocs ?</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wired - Terminal Layout</title>
+    <style>
+        /* إعدادات الألوان والخطوط الأساسية */
+        :root {
+            --bg-color: #070707;
+            --text-main: #a3a3a3;
+            --text-green: #39ff14; /* اللون الأخضر النيون */
+            --border-color: #333;
+            --border-light: #555;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            text-transform: uppercase; /* جعل كل النصوص بأحرف كبيرة كالتصميم الأصلي */
+        }
+
+        /* حاوية الموقع الأساسية */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+        }
+
+        /* تصميم الـ Header العلوي */
+        header {
+            grid-column: 1 / -1;
+            border-bottom: 2px dashed var(--border-light);
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            letter-spacing: 5px;
+            color: #fff;
+        }
+
+        .sub-header {
+            font-size: 0.7em;
+            color: #666;
+            letter-spacing: 2px;
+        }
+
+        /* الصناديق والإطارات */
+        .box {
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .box-green {
+            border: 1px solid var(--text-green);
+        }
+
+        .box-title {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: #fff;
+        }
+
+        /* القائمة الجانبية (Sidebar) */
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .avatar {
+            width: 70px;
+            height: 70px;
+            border: 1px dotted var(--text-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-green);
+            font-size: 0.8em;
+        }
+
+        .green-text {
+            color: var(--text-green);
+        }
+
+        .nav-links {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            border: 1px solid var(--text-green);
+            color: var(--text-green);
+            padding: 5px 10px;
+            text-decoration: none;
+            font-size: 0.8em;
+            transition: 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: var(--text-green);
+            color: #000;
+        }
+
+        /* قسم المحتوى الرئيسي */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 250px;
+            border: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+            margin-bottom: 15px;
+            background: repeating-linear-gradient(
+                45deg,
+                #0a0a0a,
+                #0a0a0a 10px,
+                #111 10px,
+                #111 20px
+            ); /* تأثير الخطوط الخلفية */
+        }
+
+        p {
+            text-align: justify;
+            font-size: 0.85em;
+            margin-top: 0;
+        }
+
+        /* الباركود المزيف والمعلومات السفلية */
+        .barcode {
+            font-size: 2em;
+            letter-spacing: -2px;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .sys-status {
+            font-size: 0.7em;
+            border-top: 1px dashed var(--border-color);
+            padding-top: 10px;
+            color: #666;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* التصميم المتجاوب للهواتف */
+        @media (max-width: 800px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<div class="wrapper">
-  <div class="sidebar">
-    <h2>ARCHIVE</h2>
-    <ul>
-      <li><a href="#">CASE FILES</a></li>
-      <li><a href="#">PERSONNEL</a></li>
-      <li><a href="#">INCIDENT LOGS</a></li>
-      <li><a href="#">[██████]</a></li>
-    </ul>
-  </div>
+    <div class="container">
+        <header>
+            <h1>lain</h1>
+            <div class="sub-header">SERIAL EXPERIMENTS // NO MATTER WHERE YOU GO</div>
+        </header>
 
-  <div class="content">
-    <div class="header">
-      <h1>FILE A-001</h1>
+        <aside class="sidebar">
+            <div class="box box-green">
+                <div class="profile">
+                    <div class="avatar">IMG</div>
+                    <div class="green-text" style="font-size: 0.75em; text-transform: lowercase;">
+                        lord_pm2.5<br>
+                        i keep thinking<br>about these things
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-links">
+                <a href="#" class="nav-btn">home</a>
+                <a href="#" class="nav-btn">about</a>
+                <a href="#" class="nav-btn">books i like</a>
+                <a href="#" class="nav-btn">links out</a>
+            </div>
+
+            <div class="box" style="margin-top: 20px;">
+                <div class="barcode">||||||| | ||| |||| |</div>
+                <p style="font-size: 0.7em; color: #666; margin: 0;">
+                    PRESENT DAY<br>PRESENT TIME<br>HAHAHA<br><br>
+                    AND YOU DON'T SEEM TO UNDERSTAND<br>A SHAME YOU SEEMED AN HONEST MAN
+                </p>
+            </div>
+        </aside>
+
+        <main class="content">
+            
+            <div class="box">
+                <div class="box-title">SERIAL EXPERIMENTS</div>
+                <div class="content-grid">
+                    <div>
+                        <div class="image-placeholder">[ Anime Sketch ]</div>
+                    </div>
+                    <div>
+                        <p>THERE WAS NO REASON FOR ME TO STAY IN THE REAL WORLD ANY LONGER. IN THE REAL WORLD, IT DIDN'T MATTER IF I WAS THERE OR NOT. WHEN I REALIZED THAT, I WAS NO LONGER AFRAID OF LOSING MY BODY.</p>
+                        <p>WHEN IT'S ALL SAID AND DONE, THE WIRED IS JUST A MEDIUM OF COMMUNICATION AND THE TRANSFER OF INFORMATION. YOU MUSTN'T CONFUSE IT WITH THE REAL WORLD.</p>
+                        <div class="image-placeholder" style="height: 100px;">[ 3D Wireframe ]</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="box-title" style="color: var(--text-green); border-bottom-color: var(--text-green);">KNOWLEDGE DISAPPEARS</div>
+                <p class="green-text" style="text-transform: none;">
+                    OLD MANX SAILOR I wonder whether those jolly lads bethink them of what they are dancing over. I'll dance over your grave, I will- that's the bitterest threat of your night-women, that beat head-winds round corners.
+                </p>
+            </div>
+
+            <div class="box">
+                <div class="box-title" style="text-align: center;">ADDITIONAL INFORMATION</div>
+                <p style="text-align: center; color: #888;">
+                    THE WIRED IS EVERYWHERE AND NOWHERE. IT IS THE COLLECTIVE UNCONSCIOUS OF HUMANITY, THE DIGITAL REALM WHERE INFORMATION FLOWS FREELY. BOUNDARIES BETWEEN THE PHYSICAL AND VIRTUAL WORLDS ARE ILLUSIONS CREATED BY LIMITED PERCEPTION. IN REALITY, WE ARE ALL CONNECTED THROUGH THE FLOW OF DATA.
+                </p>
+                <div class="sys-status">
+                    SYSTEM STATUS: CONNECTED | DATA FLOW: OPTIMAL | NETWORK INTEGRITY: 97.4% | CONSCIOUSNESS UPLOAD: IN PROGRESS
+                </div>
+            </div>
+
+        </main>
     </div>
-
-    <p>Status: Deceased</p>
-    <p>Subject: Angela</p>
-
-    <div class="command">
-      <a href="#">> Continue</a>
-    </div>
-  </div>
-</div>
 
 </body>
 </html>
