@@ -3,392 +3,218 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>كتاب بيل - موقع مستوحى</title>
-    <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Special+Elite&family=Qwitcher+Grypen:wght@700&family=Permanent+Marker&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>مؤسسة النجمة المحتواة | تأمين. احتواء. دراسة.</title>
     <style>
-        body {
-            background-color: #333;
-            color: #111;
-            font-family: 'Kalam', cursive;
+        /* CSS Reset for consistent looks across browsers */
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
-        /* Mock iPhone Header from image */
-        header.status-bar {
+        body {
+            background-color: #0d0d0d; /* خلفية داكنة غامضة */
+            color: #d1d1d1; /* نصوص رمادية فاتحة */
+            font-family: 'Courier New', Courier, monospace; /* خط monospace للأسلوب العسكري/السرّي */
+            padding: 20px;
+            direction: rtl; /* الكتابة من اليمين إلى اليسار */
+        }
+
+        /* رأس الصفحة - يحتوي على الشعار واسم الشركة */
+        header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            background: #e0e0e0;
-            color: #555;
-            font-family: sans-serif;
-            font-size: 14px;
-            padding: 5px 15px;
-            border-bottom: 2px solid #999;
-        }
-        header.status-bar div {
-            display: flex;
-            gap: 5px;
-        }
-
-        /* Main Content Container, simulating a page */
-        .page-container {
-            background: #fdf6e3 url('https://www.toptal.com/designers/subtlepatterns/patterns/old-map.png'); /* Placeholder texturized paper */
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 40px;
-            box-shadow: 10px 10px 30px rgba(0,0,0,0.5);
-            position: relative;
-            clip-path: polygon(1% 2%, 100% 0, 98% 100%, 0 98%);
-            border: 2px solid #000;
-        }
-
-        /* Elements from image_0.png */
-        .section-about-me h1 {
-            font-family: 'Qwitcher Grypen', cursive;
-            font-size: 4rem;
-            text-transform: uppercase;
-            text-align: center;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 0px #ffff00;
-        }
-        .brain-chart {
-            display: flex;
-            gap: 20px;
+            justify-content: space-between;
+            border-bottom: 2px solid #b71c1c; /* خط أحمر متقطع من الشعار */
+            padding-bottom: 20px;
             margin-bottom: 30px;
         }
-        .brain-img {
-            max-width: 40%;
-            border: 3px solid #000;
-            box-shadow: 5px 5px 0px #000;
-        }
-        .biography {
-            columns: 2;
-            column-gap: 30px;
-            font-family: 'Special Elite', cursive;
-            text-align: justify;
+
+        .logo-container {
+            width: 80px; /* حجم الشعار */
+            height: 80px;
+            margin-left: 20px;
         }
 
-        .bill-shirt {
-            text-align: center;
-            margin: 20px 0;
-        }
-        .bill-shirt img {
-            max-width: 30%;
+        .logo-container img {
+            width: 100%;
+            height: auto;
+            filter: contrast(120%); /* زيادة التباين للشعار ليتناسب مع الخلفية */
         }
 
-        /* The Bill Magazine Mockup */
-        .magazine-cover {
-            border: 5px solid #000;
+        h1 {
+            color: #f2e04d; /* لون أصفر غامق من الشعار */
+            font-size: 2.2em;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 0px #b71c1c; /* تأثير ظل أحمر لإحساس بالتوتر */
+        }
+
+        /* روابط التنقل */
+        nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        nav a {
+            color: #d1d1d1;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            padding: 5px 10px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ff5252; /* لون أحمر ساطع عند التحويم */
+            border-color: #ff5252;
+            background-color: #222;
+        }
+
+        /* منطقة المحتوى الرئيسية */
+        main {
+            display: grid;
+            grid-template-columns: 2fr 1fr; /* تقسيم الصفحة: محتوى رئيسي وشريط جانبي */
+            gap: 30px;
+        }
+
+        /* تأثير الخلل (Glitch Effect) للعناوين */
+        .glitch {
+            position: relative;
+            color: #f2e04d;
+            text-shadow: 1px 1px 0px #b71c1c, -1px -1px 0px #00ffff;
+            animation: glitch 2s infinite;
+        }
+
+        @keyframes glitch {
+            0%, 100% { text-shadow: 1px 1px 0px #b71c1c, -1px -1px 0px #00ffff; }
+            20% { text-shadow: 2px 2px 0px #ff5252, -2px -2px 0px #00ffff; }
+            40% { text-shadow: -1px -1px 0px #b71c1c, 1px 1px 0px #00ffff; }
+            60% { text-shadow: 3px 3px 0px #ff5252, -1px -1px 0px #00ffff; }
+            80% { text-shadow: -2px -2px 0px #b71c1c, 2px 2px 0px #00ffff; }
+        }
+
+        /* أقسام المحتوى */
+        section {
+            border: 1px dashed #b71c1c; /* خط متقطع مثل حدود مناطق الاحتواء */
             padding: 20px;
-            margin-top: 40px;
-            background-color: #ffffdd;
-            position: relative;
-            box-shadow: 8px 8px 0 #c00;
-        }
-        .mag-header {
-            font-size: 100px;
-            font-weight: bold;
-            font-family: 'Arial Black', sans-serif;
-            color: #000;
-            position: absolute;
-            top: 10px;
-            left: 10px;
-        }
-        .mag-subtitle {
-            font-size: 20px;
-            font-family: sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-top: 70px;
-            color: #555;
-        }
-        .cover-story {
-            font-family: 'Impact', sans-serif;
-            font-size: 40px;
-            color: red;
-            text-transform: uppercase;
-            margin: 20px 0;
-        }
-
-        /* Elements from image_1.png */
-        .parallel-dimensions {
-            background-color: #000;
-            color: #fff;
-            padding: 30px;
-            border-radius: 15px;
-            margin-top: 40px;
-            position: relative;
-            border: 3px solid #ff00ff;
-        }
-        .rainbow-text {
-            font-family: 'Special Elite';
-            font-weight: bold;
-            font-size: 2.5rem;
-            background-image: linear-gradient(to right, #00ffff, #ff00ff, #ffff00);
-            -webkit-background-clip: text;
-            color: transparent;
-            text-shadow: 2px 2px 4px #000, -2px -2px 4px #fff;
-            margin: 0;
-        }
-        .multi-bills {
-            text-align: center;
-            margin: 20px 0;
-        }
-        .multi-bills img {
-            max-width: 100%;
-        }
-
-        /* Elements from image_2.png */
-        .chapter-skin {
-            background-color: #ff99cc;
-            color: #330000;
-            padding: 30px;
-            margin-top: 40px;
-            border: 2px solid #000;
-            position: relative;
-        }
-        .chapter-badge {
-            position: absolute;
-            top: -20px;
-            left: -20px;
-            background: #c00;
-            color: #fff;
-            font-family: 'Qwitcher Grypen';
-            padding: 10px 15px;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            border: 3px solid #000;
-        }
-        .chapter-skin h2 {
-            font-family: 'Vibur', cursive;
-            background-color: #ffff00;
-            display: inline-block;
-            padding: 5px 15px;
-            border: 2px solid #000;
-        }
-        .skin-diagram {
-            text-align: center;
+            background-color: #1a1a1a;
             margin-bottom: 20px;
         }
-        .larry-king-section {
-            border: 4px solid #000;
-            background-color: #ddd;
+
+        h2 {
+            color: #f2e04d;
+            border-bottom: 1px solid #b71c1c;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        /* الشريط الجانبي (Terminal-like entry) */
+        aside {
+            border: 1px solid #f2e04d;
+            background-color: #0d0d0d;
+            color: #a5d6a7; /* لون أخضر مثل الشاشات القديمة */
             padding: 15px;
-            max-width: 200px;
-            margin: 0 auto;
-        }
-        .larry-king-section p {
-            font-family: 'UnifrakturMaguntia', serif;
-            font-weight: bold;
-            font-size: 1.5rem;
-            margin: 10px 0 0;
+            overflow: auto;
         }
 
-        /* Buy Gold Bye - the flames and symbols */
-        .buy-gold-bye {
-            margin-top: 40px;
-            text-align: center;
-            border: 5px solid #ffcc00;
-            padding: 20px;
-            background: radial-gradient(circle, #ff6600, #331100);
-            clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 5% 100%);
-        }
-        .buy-gold-bye-img {
-            max-width: 60%;
-        }
-        .buy-gold-text {
-            font-family: 'Permanent Marker', cursive;
-            font-size: 3rem;
-            color: #ffcc00;
-            text-shadow: 2px 2px 0px #000;
-        }
-
-        /* Elements from image_4.png - Portal Construction */
-        .portal-construction {
-            background-color: #ffffcc;
-            border: 2px dashed #000;
-            margin-top: 40px;
-            padding: 20px;
-        }
-        .portal-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 20px;
-        }
-        .portal-item {
-            border: 2px solid #000;
-            background-color: #fff;
-            padding: 10px;
-            text-align: center;
-        }
-        .portal-item h4 {
-            margin: 0 0 10px;
-            font-family: 'Kalam', cursive;
-            text-transform: uppercase;
-            border-bottom: 2px solid #000;
-        }
-        .aliens-guess {
-            grid-column: span 3;
-            text-align: center;
-            border: 5px solid #ffff00;
-            background-color: #eee;
-            padding: 20px;
-            margin-top: 20px;
-        }
-
-        /* Footer elements */
-        footer.page-footer {
-            margin-top: 60px;
-            text-align: center;
-            border-top: 3px solid #000;
-            padding: 20px;
-            font-family: sans-serif;
-            color: #555;
-            background: linear-gradient(to top, rgba(0,0,0,0.2), transparent);
-        }
-        .archive-link {
-            display: inline-block;
-            background-color: rgba(255, 255, 0, 0.7);
-            padding: 5px 15px;
-            border-radius: 20px;
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
+        aside h3 {
+            color: #f2e04d;
             margin-bottom: 10px;
         }
-        .cypher {
-            font-size: 10px;
-            opacity: 0.3;
+
+        /* تأثيرات إضافية "شاذة" */
+        .anomalous-note {
+            color: #ff5252;
+            font-style: italic;
+            background-color: #2c2c2c;
+            padding: 10px;
+            border-right: 3px solid #ff5252;
         }
 
-        /* Misc Cyphers on the margins */
-        .page-container::before {
-            content: "BILL IS REAL";
-            font-size: 8px;
-            color: #ccc;
-            position: absolute;
-            top: 50%;
-            left: -50px;
-            transform: rotate(-90deg);
+        /* التذييل */
+        footer {
+            border-top: 2px solid #b71c1c;
+            color: #888;
+            text-align: center;
+            font-size: 0.9em;
+            margin-top: 40px;
+            padding-top: 20px;
         }
-        .page-container::after {
-            content: "EYE SEE YOU";
-            font-size: 8px;
-            color: #ccc;
-            position: absolute;
-            top: 50%;
-            right: -50px;
-            transform: rotate(90deg);
+
+        /* تصميم متجاوب للهواتف */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .logo-container {
+                margin: 0 0 10px 0;
+            }
+            main {
+                grid-template-columns: 1fr;
+            }
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
-    <header class="status-bar">
-        <div class="left">
-            <span>١٣</span> <span>4G</span> <span><img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/IPhone_Signal.svg" height="12"></span>
+
+    <header>
+        <div class="logo-container">
+            <img src="logo.png" alt="شعار مؤسسة النجمة المحتواة">
         </div>
-        <div class="right">
-            <span>٨:٣٣</span> <span><img src="https://upload.wikimedia.org/wikipedia/commons/e/eb/iPhone_Battery_Charging.svg" height="12"></span>
-        </div>
+        <h1>مؤسسة النجمة المحتواة</h1>
+        <nav>
+            <a href="#about">حول</a>
+            <a href="#archives">الأرشيف</a>
+            <a href="#login">تسجيل الدخول</a>
+        </nav>
     </header>
 
-    <div class="page-container">
-        <section class="section-about-me">
-            <h1>عني (ABOUT ME)</h1>
-            <div class="brain-chart">
-                <img class="brain-img" src="https://via.placeholder.com/200?text=دماغ+بيل" alt="مخطط دماغ بيل مع الرموز المشفرة">
-                <div class="biography">
-                    <p>فكر بي كصديقك الوحيد الذي لا يمكن أن يموت. فكرة سيئة ووقت جيد. الرجل الذي يسحب الخيوط خلف الحجاب غير المعرف للإدراك. ولدي ربطة عنق صغيرة لطيفة!</p>
-                    <p>لقد مررت بأسماء كثيرة. رقابة الشبكة يطلقون علي "دعوى قضائية تنتظر الحدوث". يسميني الأطباء النفسيون "علامة على أن الدواء لا يعمل". القتلة المتسلسلون يسمونني "بصراحة، مدهش بشكل متواضع وممتع". أينما كانت هناك يد للمصافحة وصفقة يجب إبرامها، يا صاح، أنا هناك!</p>
-                </div>
-            </div>
-            <div class="bill-shirt">
-                <img src="https://via.placeholder.com/150?text=بيل+بقميص+وردي" alt="بيل سايفر يرتدي قميصًا ورديًا">
-            </div>
+    <main>
+        <section id="status">
+            <h2 class="glitch">حالة المنشأة</h2>
+            <p><strong>[بيانات محذوفة]</strong>. تم تأمين المستويات 1-4 بالكامل.</p>
+            <p>الوضع الحالي: تأمين كامل للموقع (Locked Down). جميع الأنشطة غير الأساسية محظورة.</p>
         </section>
 
-        <section class="magazine-cover">
-            <div class="mag-header">B</div>
-            <p class="mag-subtitle">مجلة بيل (THE BILL MAGAZINE)</p>
-            <div class="cover-lines">
-                <p class="cover-story">فقدت الوزن عن طريق إزالة جلدي!</p>
-                <p>حرق السعرات الحرارية...</p>
-                <p>وطفل وحقيبة؟ يمكنك تناول كلاهما!</p>
-            </div>
-            <p class="cypher" style="color: black; opacity: 0.1">#BILLSAIDSO</p>
+        <section id="case-files">
+            <h2>أحدث ملف حالة: الكيان 007-N</h2>
+            <p>اللقاء النجمي</p>
+            <p>الوصف: حالة غير عادية تتضمن كائنًا نجميًا متجسدًا (الشخصية الصفراء) في حالة تفاعل أو اندماج مع وسيط احتواء حيوي (الشخصية الحمراء). يتم مراقبة الأنشطة. [انظر السجلات الكاملة للمزيد]</p>
+            <p class="anomalous-note">تحذير: لا يزال مستوى الخطر حرجًا. تجنب أي تواصل مباشر دون إذن مستوى 5.</p>
         </section>
 
-        <section class="parallel-dimensions">
-            <h2 class="rainbow-text">أبعاد متوازية</h2>
-            <p class="rainbow-text">(PARALLEL DIMENSIONS)</p>
-            <div class="multi-bills">
-                <img src="https://via.placeholder.com/600x150?text=أشكال+بيل+المتعددة" alt="أربعة بيل سايفرز ملونين في أبعاد مختلفة">
-            </div>
-            <div class="dimension-text">
-                <p>حسنًا، سكريملز ميت. كان يجب أن يحدث! صدقني، لقد قدمنا ​​لهذا الرجل خدمة. بمجرد أن تحصل على قزم كتاب واحد، سرعان ما يصبح هناك المزيد، يأكلون كل الفواصل ويشربون بريق صفحتك!</p>
-                <p>إذا كان هذا يجعلك تشعر بتحسن، فهناك بُعد حيث لا يزال على قيد الحياة وبصحة جيدة! أنا واحد من القلائل الموهوبين بالقدرة على النظر إلى هذه العوالم الأخرى.</p>
-                <p>هناك عالم حيث كل خطأ مطبعي ترتكبه يتحقق! (الكثير من البط في هذا البعد.) عالم حيث أنا مربع. (لا نتحدث عن هذا العالم.) تشيبي فيرس مرعب حيث تم رمل أذرع الجميع وسيقانهم إلى نتوءات!</p>
-                <p>ويمكنني أن أرى عوالم... حيث خسرت عائلة باينز</p>
-            </div>
+        <section id="security">
+            <h2>البروتوكولات الأمنية</h2>
+            <p>مراجعة شاملة لبروتوكولات الاحتواء جارية. جميع الأفراد مطالبون بتقديم تقارير حالة يومية.</p>
+            <p>تم تفعيل نظام الدفاع التلقائي (ADS) في القطاع "أوميغا". أي اختراق سيواجه قوة قاضية.</p>
         </section>
 
-        <section class="chapter-skin">
-            <div class="chapter-badge">الفصل ٩</div>
-            <h2>الجلد (SKIN)</h2>
-            <div class="skin-diagram">
-                <img src="https://via.placeholder.com/400x200?text=تشريح+الجلد" alt="مخطط تشريح الجلد البشري">
-            </div>
-            <div style="display:flex; justify-content:space-around;">
-                <div class="larry-king-section">
-                    <img src="https://via.placeholder.com/150?text=لاري+كينج" alt="لاري كينج" style="max-width:100%; border:2px solid black;">
-                    <p>إنه لا مفر منه</p>
-                </div>
-                <div class="bill-scream">
-                    <img src="https://via.placeholder.com/200?text=بيل+يصرخ" alt="بيل سايفر يصرخ بصوت عالٍ">
-                    <p class="cypher">AAAAA... AAAAA... AAAAA</p>
-                </div>
-            </div>
-        </section>
+        <aside>
+            <h3>سجلات الإدخال (Terminal View)</h3>
+            <p>> تحميل قاعدة البيانات... تم.</p>
+            <p>> جاري البحث عن "تصنيف النجمة القرمزية"...</p>
+            <p>> الكيان 007-N: تم الكشف عنه في [محذوف] - القطاع [محذوف]</p>
+            <p>> مستوى الاحتواء: Keter (نسخة عربية: كاتم)</p>
+            <p>> ملاحظات الباحث: الأشكال المدببة للنجمة تبدو غير مستقرة، وتتغير مع شدة التشابك.</p>
+            <p class="anomalous-note">> [خطأ في قراءة البيانات] [رمز سديم النجمة]</p>
+        </aside>
+    </main>
 
-        <section class="buy-gold-bye">
-            <img class="buy-gold-bye-img" src="https://via.placeholder.com/400?text=بيل+في+اللهب" alt="بيل سايفر في اللهب">
-            <h3 class="buy-gold-text">اشترِ الذهب، وداعًا</h3>
-        </section>
+    <footer>
+        <p>تحذير أمني: الوصول غير المصرح به محظور تمامًا وسيتم تتبعه. ممتلكات مؤسسة النجمة المحتواة.</p>
+        <p>حقوق النشر © [بيانات محذوفة] - مؤسسة النجمة المحتواة.</p>
+    </footer>
 
-        <section class="portal-construction">
-            <div class="chapter-badge">الفصل ٩</div>
-            <h2>من يريد بناء بوابتي؟</h2>
-            <p>(WHO WANTS TO BUILD MY PORTAL?)</p>
-            <div class="portal-grid">
-                <div class="portal-item">
-                    <h4>مصر القديمة</h4>
-                    <img src="https://via.placeholder.com/150?text=الفرعون" alt="قناع فرعوني" style="max-width:100%">
-                    <p class="cypher">PHARAOH</p>
-                </div>
-                <div class="portal-item">
-                    <h4>الأزتيك</h4>
-                    <img src="https://via.placeholder.com/150?text=تقويم" alt="تقويم الأزتك" style="max-width:100%">
-                    <p class="cypher">AZTEC</p>
-                </div>
-                <div class="portal-item">
-                    <h4>جزيرة الفصح</h4>
-                    <img src="https://via.placeholder.com/150?text=موآي" alt="تمثال موآي" style="max-width:100%">
-                    <p class="cypher">MOAI</p>
-                </div>
-            </div>
-            <div class="aliens-guess">
-                <img src="https://via.placeholder.com/300x150?text=جورج+تسوكالوس" alt="رجل نظرية الفضائيين القدامى" style="border: 2px solid black">
-                <h3 class="cypher">ALIENS? (المخلوقات الفضائية؟)</h3>
-                <p>الظلام (DARK)</p>
-            </div>
-        </section>
-
-        <footer class="page-footer">
-            <a href="#" class="archive-link">dn710003.ca.archive.org</a>
-            <p class="cypher">جميع الحقوق محفوظة. لا تحاول التمرير السريع. أنا أرى كل شيء.</p>
-        </footer>
-    </div>
 </body>
 </html>
