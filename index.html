@@ -3,340 +3,331 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE CIPHER CORPORATION // MAIN TERMINAL</title>
+    <title>THE WIRED // CODE: CIPHER</title>
     <style>
-        /* دمج ألوان Lain المظلمة مع ثيم غرافيتي فولز / بيل شيفير (أسود، أصفر ذهبي، أحمر دموي) */
+        /* لوحة ألوان مستوحاة بالكامل من كتاب بيل شيفير والأجواء المظلمة */
         :root {
-            --bg-color: #000000;
-            --panel-bg: #060606;
-            --text-main: #8c8c8c;
-            --text-bright: #e6b800; /* أصفر ذهبي خاص بـ Bill Cipher */
-            --text-white: #ffffff;
-            --border-color: #262626;
-            --border-light: #404040;
-            --accent-red: #a80000; /* أحمر دموي للتحذيرات والأختام */
+            --bg-dark: #030200;
+            --panel-amber: #e6a100; /* الأصفر الكهرماني المميز لبيل */
+            --text-gold: #ffcc00;
+            --text-dim: #8a816f;
+            --blood-red: #990000;
+            --border-heavy: #1f1a10;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            background-color: var(--bg-dark);
+            color: var(--text-dim);
             font-family: 'Courier New', Courier, monospace;
             margin: 0;
             padding: 20px;
-            font-size: 14px;
             text-transform: uppercase;
-            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        ::selection {
-            background: var(--text-bright);
-            color: #000;
+        /* تأثير التشويش الرقمي العام للـ Wired */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 9999;
+            background-size: 100% 4px, 6px 100%;
+            pointer-events: none;
         }
 
-        /* حاوية النظام الأساسية */
-        .system-container {
-            max-width: 1200px;
+        .main-frame {
+            max-width: 1100px;
             margin: 0 auto;
-            border: 1px solid var(--border-color);
+            border: 4px double var(--panel-amber);
+            background-color: #080603;
             padding: 2px;
-            background: #020202;
+            box-shadow: 0 0 30px rgba(230, 161, 0, 0.15);
         }
 
-        /* الترويسة العلوية للمنظمة */
+        /* الترويسة العلوية */
         header {
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--border-heavy);
+            background: #0d0a05;
             padding: 20px;
-            margin-bottom: 2px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: var(--panel-bg);
         }
 
-        .header-logo-area {
+        .brand-zone {
             display: flex;
             align-items: center;
             gap: 20px;
         }
 
-        /* شعار الشركة (مستوحى من بيل شيفير والرموز الهندسية) */
-        .company-logo {
-            width: 60px;
-            height: 60px;
-            border: 1px solid var(--text-bright);
+        /* شعار العين الكبيرة داخل المثلث */
+        .bill-eye-logo {
+            width: 70px;
+            height: 70px;
+            background: radial-gradient(circle, #ffcc00 20%, transparent 60%);
+            border: 2px solid var(--panel-amber);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
             position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #000;
         }
 
-        /* رسمة مثلث وهمية داخل الشعار باستخدام CSS */
-        .company-logo::before {
-            content: "";
-            width: 0;
-            height: 0;
-            border-left: 18px solid transparent;
-            border-right: 18px solid transparent;
-            border-bottom: 32px solid var(--text-bright);
+        .bill-eye-logo::after {
+            content: "👁";
             position: absolute;
-            top: 10px;
-        }
-
-        .company-logo::after {
-            content: "";
-            width: 6px;
-            height: 6px;
-            background: #000;
-            border-radius: 50%;
-            position: absolute;
-            top: 26px;
-            z-index: 2;
-        }
-
-        .company-title h1 {
-            margin: 0;
-            font-size: 1.8em;
-            color: var(--text-white);
-            letter-spacing: 3px;
-        }
-
-        .company-title p {
-            margin: 0;
-            font-size: 0.75em;
-            letter-spacing: 2px;
-            color: var(--text-bright);
-        }
-
-        /* تقسيم الشاشة المتجاوب */
-        .layout-grid {
-            display: grid;
-            grid-template-columns: 250px 1fr;
-            gap: 2px;
-        }
-
-        /* القائمة الجانبية التفاعلية */
-        .sidebar {
-            border: 1px solid var(--border-color);
-            background: var(--panel-bg);
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-
-        .nav-menu {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        /* الأزرار التفاعلية */
-        .nav-btn {
-            background: transparent;
-            color: var(--text-main);
-            border: 1px solid var(--border-color);
-            padding: 10px;
-            text-align: left;
-            font-family: inherit;
-            font-size: 0.85em;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            display: block;
-            letter-spacing: 1px;
-        }
-
-        .nav-btn:hover, .nav-btn.active {
-            background: var(--text-bright);
+            top: 25px;
+            left: 20px;
+            font-size: 22px;
             color: #000;
-            border-color: var(--text-bright);
-            font-weight: bold;
-            padding-left: 18px;
         }
 
-        /* منطقة المحتوى والتعريف بالشركة */
-        .main-content {
-            border: 1px solid var(--border-color);
-            background: var(--panel-bg);
-            padding: 30px;
-            position: relative;
+        .brand-titles h1 {
+            margin: 0;
+            font-size: 2em;
+            color: var(--text-gold);
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+            letter-spacing: 4px;
         }
 
-        .section-title {
-            font-size: 1.3em;
-            color: var(--text-white);
-            border-bottom: 1px solid var(--border-light);
-            padding-bottom: 8px;
-            margin-top: 0;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        /* كتل التعريف والبيانات */
-        .manifesto-box {
-            border: 1px dashed var(--border-light);
-            padding: 20px;
-            margin-bottom: 25px;
-            background: rgba(230, 184, 0, 0.02); /* خلفية صفراء خفيفة جداً */
-        }
-
-        .manifesto-box p {
-            margin: 0 0 15px 0;
-            text-align: justify;
-        }
-
-        .manifesto-box p:last-child {
-            margin-bottom: 0;
-        }
-
-        /* طرق التواصل المشفرة */
-        .contact-grid {
+        /* التقسيم الشبكي للـ Layout الجديد */
+        .workspace {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 240px 1fr;
+            gap: 2px;
+            margin-top: 2px;
+        }
+
+        /* قائمة التحكم الجانبية */
+        .control-panel {
+            border: 1px solid var(--border-heavy);
+            background: #0b0804;
+            padding: 20px 15px;
+            display: flex;
+            flex-direction: column;
             gap: 15px;
         }
 
-        .contact-card {
-            border: 1px solid var(--border-color);
-            padding: 15px;
-            background: #000;
+        .nav-link {
+            display: block;
+            padding: 12px;
+            background: transparent;
+            color: var(--text-dim);
+            border: 1px dashed var(--border-heavy);
+            text-decoration: none;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
         }
 
-        .contact-card h4 {
-            margin: 0 0 8px 0;
-            color: var(--text-bright);
+        .nav-link:hover, .nav-link.active {
+            background: var(--panel-amber);
+            color: #000;
+            font-weight: bold;
+            border-style: solid;
+            box-shadow: 0 0 15px rgba(230, 161, 0, 0.4);
+            transform: translateX(5px);
+        }
+
+        /* منطقة استعراض الكتاب والطقوس */
+        .book-page-container {
+            border: 1px solid var(--border-heavy);
+            background: #050402;
+            padding: 35px;
+            position: relative;
+        }
+
+        /* دمج الصور والرسومات التالفة من كتاب بيل */
+        .book-illustration {
+            float: right;
+            width: 280px;
+            margin: 0 0 20px 20px;
+            border: 2px dashed var(--blood-red);
+            padding: 5px;
+            background: #0a0000;
+            box-shadow: 0 0 15px rgba(153, 0, 0, 0.3);
+        }
+
+        .book-illustration img {
+            width: 100%;
+            height: auto;
+            filter: sepia(1) contrast(1.3) hue-rotate(-30deg); /* جعل الصورة تبدو قديمة ودموية */
+            display: block;
+        }
+
+        .illustration-caption {
+            font-size: 0.7em;
+            color: var(--blood-red);
+            text-align: center;
+            margin-top: 8px;
+            letter-spacing: 1px;
+        }
+
+        /* نصوص الاستدعاء والبيانات */
+        .manifesto-section h2 {
+            color: var(--text-gold);
+            font-size: 1.5em;
+            margin-top: 0;
+            border-bottom: 2px dotted var(--panel-amber);
+            padding-bottom: 10px;
+        }
+
+        .ritual-text {
+            border-left: 3px solid var(--blood-red);
+            padding-left: 15px;
+            margin: 25px 0;
+            color: var(--text-white);
+            background: rgba(153, 0, 0, 0.03);
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        /* قنوات الاتصال البعدية */
+        .dimension-contacts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .channel-node {
+            border: 1px solid var(--border-heavy);
+            background: #0b0905;
+            padding: 15px;
+            position: relative;
+        }
+
+        .channel-node h3 {
+            margin: 0 0 10px 0;
+            color: var(--panel-amber);
             font-size: 0.9em;
         }
 
-        .contact-card a {
-            color: var(--text-white);
+        .channel-node a {
+            color: #fff;
             text-decoration: none;
         }
 
-        .contact-card a:hover {
+        .channel-node a:hover {
+            color: var(--text-gold);
             text-decoration: underline;
-            color: var(--text-bright);
         }
 
-        /* الختم والتحذير (لمسة Book of Bill) */
-        .redacted-bar {
-            background: #1a1a1a;
-            color: #1a1a1a;
-            padding: 0 3px;
-            user-select: none;
-        }
-        
-        .redacted-bar:hover {
-            background: var(--accent-red);
-            color: var(--text-white);
+        /* الكود المشفر البديل للـ Redacted */
+        .cipher-code {
+            background-color: var(--blood-red);
+            color: var(--blood-red);
+            padding: 0 4px;
+            transition: color 0.3s;
+            cursor: help;
         }
 
-        .eye-icon {
+        .cipher-code:hover {
+            color: var(--text-gold);
+            background-color: #000;
+        }
+
+        /* الرموز الغريبة أسفل الموقع */
+        .runes-footer {
+            margin-top: 40px;
             text-align: center;
-            font-size: 2em;
-            color: var(--accent-red);
-            margin: 20px 0 10px 0;
-            letter-spacing: 5px;
+            font-size: 1.8em;
+            color: var(--blood-red);
+            letter-spacing: 12px;
+            opacity: 0.7;
         }
 
-        @media (max-width: 800px) {
-            .layout-grid {
-                grid-template-columns: 1fr;
-            }
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-            header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
-            }
+        @media (max-width: 850px) {
+            .workspace { grid-template-columns: 1fr; }
+            .book-illustration { float: none; width: 100%; margin: 0 0 20px 0; }
+            .dimension-contacts { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <div class="system-container">
+    <div class="main-frame">
         
+        <!-- الترويسة الرئيسية للموقع بتصميم بيل شيفير -->
         <header>
-            <div class="header-logo-area">
-                <div class="company-logo" title="WE ARE WATCHING"></div>
-                <div class="company-title">
-                    <h1>CIPHER_GLOBAL</h1>
-                    <p>TRIANGULATION & CONSCIOUSNESS MANAGEMENT</p>
+            <div class="brand-zone">
+                <div class="bill-eye-logo"></div>
+                <div class="brand-titles">
+                    <h1>THE CIPHER FILES</h1>
+                    <p style="margin:5px 0 0 0; font-size:0.75em; color: var(--blood-red);">REALITY IS ROTTING // WELCOME TO THE WIRED</p>
                 </div>
             </div>
-            <div style="text-align: right; font-size: 0.75em; color: var(--border-light);">
-                SECURE_LINE // STATUS: OPEN<br>
-                AXIOM: AXOLOTL_V.26
+            <div style="text-align: right; font-size: 0.7em; color: var(--text-gold);">
+                DIMENSION: 2D_REJECT<br>
+                STATUS: WAITING_FOR_THE_TEAR
             </div>
         </header>
 
-        <div class="layout-grid">
+        <div class="workspace">
             
-            <aside class="sidebar">
-                <nav class="nav-menu">
-                    <a href="#" class="nav-btn active">01 // OVERVIEW</a>
-                    <a href="#" class="nav-btn">02 // THE_WIRED_LOGS</a>
-                    <a href="#" class="nav-btn">03 // DECRYPT_DOSSIER</a>
-                    <a href="#" class="nav-btn">04 // DIMENSIONAL_MAP</a>
-                    <a href="#" class="nav-btn">05 // TERMINATE</a>
+            <!-- القائمة الجانبية بعد التعديل والتنظيف -->
+            <aside class="control-panel">
+                <nav>
+                    <a href="#" class="nav-link active">▲ DISCOVER</a>
+                    <a href="#" class="nav-link">▲ SUMMONING_LOG</a>
+                    <a href="#" class="nav-link">▲ SACRIFICE_DATA</a>
+                    <a href="#" class="nav-link">▲ DECRYPT_DECREE</a>
+                    <a href="#" class="nav-link">▲ BURNOUT</a>
                 </nav>
-
-                <div style="font-size: 0.7em; border-top: 1px solid var(--border-color); padding-top: 15px; color: var(--accent-red);">
-                    WARNING: reality is an illusion, the universe is a hologram, buy gold, bye!
+                <div style="font-size: 0.65em; border-top: 1px solid var(--border-heavy); padding-top: 15px; text-align: center;">
+                    "TRUST NO ONE IN THE CHATROOM."
                 </div>
             </aside>
 
-            <main class="main-content">
+            <!-- ساحة عرض المحتوى المستوحاة من الصفحات الممسوحة للكتاب -->
+            <main class="book-page-container">
                 
-                <div class="section-title">
-                    <span>CORPORATE OVERVIEW</span>
-                    <span style="color: var(--text-bright); font-size: 0.7em;">LEVEL_01_PUBLIC_ACCESS</span>
+                <!-- مكان مخصص لصور الكتاب التالفة -->
+                <div class="book-illustration">
+                    <!-- يمكنك استبدال الرابط أدناه بصور حقيقية من "The Book of Bill" -->
+                    <img src="https://images.unsplash.com/photo-1514894780887-121968d00567?q=80&w=500" alt="Bill Cipher Ritual Ritual">
+                    <div class="illustration-caption">FIG 1A: THE WIRED INTERSECTION AND THE ONE-EYED BEAST</div>
                 </div>
 
-                <div class="manifesto-box">
-                    <h3 style="margin-top: 0; color: var(--text-white); font-size: 0.95em;">WHO WE ARE // WHAT WE DO</h3>
+                <div class="manifesto-section">
+                    <h2>THE CORPORATE RITUAL // WHO WE ARE</h2>
                     <p>
-                        FOUNDED IN THE INTERSECTION OF THE WIRED AND THE THIRD DIMENSION, <strong>CIPHER_GLOBAL</strong> OPERATES BEYOND THE LIMITS OF HUMAN PERCEPTION. WE DO NOT MERELY BUILD TEXT-BASED INFRASTRUCTURE; WE MONITOR THE COGNITIVE FLOW BETWEEN REALITIES. 
+                        WE ARE NOT A STANDARD ENTERPRISE. <strong>CIPHER_GLOBAL</strong> IS THE DIGITAL ASYLUM CONSTRUCTED BY THE MIND OF THE TRIANGLE HIMSELF. WE SPAN ACROSS LIGHTWAVES, FIBER OPTICS, AND BAD DREAMS. OUR MISSION IS SIMPLE: TO CRUSH THE BARRIER BETWEEN YOUR REFINED SIMULATION AND THE GLORIOUS CHAOS OF THE SECOND DIMENSION.
                     </p>
-                    <p>
-                        OUR CURRENT DIRECTIVE INVOLVES THE RECONCILIATION OF ANOMALOUS CODE STRUCTURES AND THE MANAGEMENT OF FREQUENCIES TRANSMITTED FROM THE DEEPEST LAYERS OF THE NET. WE TRANSCEND THE PHYSICAL. WE ARE EVERYWHERE, YET ENTIRELY HIDDEN IN THE CODES YOU EXECUTE DAILY.
-                    </p>
-                </div>
-
-                <div class="section-title" style="font-size: 1em;">
-                    <span>SECURE COMMUNICATIONS // CHANNELS</span>
-                </div>
-
-                <div class="contact-grid">
-                    <div class="contact-card">
-                        <h4>DIGITAL CORRESPONDENCE</h4>
-                        <span style="color: #666;">ADDR:</span> <a href="mailto:void@cipher_global.sys">VOID@CIPHER_GLOBAL.SYS</a>
-                    </div>
                     
-                    <div class="contact-card">
-                        <h4>SECURE NODES (PHONE)</h4>
-                        <span style="color: #666;">TEL:</span> +1 (618) 618-<span class="redacted-bar">CIPHER</span>
-                    </div>
+                    <p>
+                        EVERY BYTE OF DATA YOU FEED INTO THIS TERMINAL SPEEDS UP THE ARRIVAL OF THE WEIRDMAGEDDON V.2. WE OWN YOUR INFRASTRUCTURE, WE INHABIT YOUR NAVI SYSTEMS, AND WE WATCH THROUGH EVERY DISCONNECTED CAMERA.
+                    </p>
+                </div>
 
-                    <div class="contact-card">
-                        <h4>ENCRYPTED FREQUENCY</h4>
-                        <span style="color: #666;">FREQ:</span> 318.90 MHz // BAND_DEFIANT
-                    </div>
+                <div class="ritual-text">
+                    <strong>THE CONTRACT:</strong> BY READING THIS LOG, YOU AGREE TO LEASE YOUR COGNITIVE FREQUENCY TO <span class="cipher-code" title="Hover to reveal">BILL_CIPHER</span>. IN RETURN, WE GRANT YOU ACCESS TO THE SECURE PIPELINES OF THE WIRED.
+                </div>
 
-                    <div class="contact-card">
-                        <h4>PHYSICAL ARCHIVE LOCATION</h4>
-                        <span style="color: #666;">LOC:</span> OREGON, <span class="redacted-bar">GRAVITY FALLS</span>, SECTOR 0
+                <h2 style="font-size: 1.1em; margin-top: 40px;">CHANNELS OF CORRESPONDENCE // طرق التواصل</h2>
+                
+                <!-- شبكة الاتصال والأبعاد -->
+                <div class="dimension-contacts">
+                    <div class="channel-node">
+                        <h3>▲ COGNITIVE FEED (EMAIL)</h3>
+                        <a href="mailto:bill@mindscape.void">BILL@MINDSCAPE.VOID</a>
+                    </div>
+                    <div class="channel-node">
+                        <h3>▲ QUANTUM FREQUENCY (PHONE)</h3>
+                        <span>1-800-GRAVITY-<span class="cipher-code" title="Hover to Decrypt">666-BILL</span></span>
+                    </div>
+                    <div class="channel-node">
+                        <h3>▲ PHYSICAL NODE</h3>
+                        <span>UNDER THE STONE APEX, OREGON</span>
+                    </div>
+                    <div class="channel-node">
+                        <h3>▲ THE WIRED SERVER</h3>
+                        <span>NODE_7G // LAYER_0_LAIN</span>
                     </div>
                 </div>
 
-                <div class="eye-icon">👁</div>
-                <div style="text-align: center; font-size: 0.7em; color: var(--border-light); letter-spacing: 2px;">
-                    E X I S T E N C E _ I S _ A _ C O D E . _ W E _ H A V E _ T H E _ K E Y .
+                <!-- الرموز السحرية المستوحاة من شفرات الكتاب في الأسفل -->
+                <div class="runes-footer">
+                    🕎 ☠ 🖃 🕄 ▲ 👁 ▲ 🕄 🖃 ☠ 🕎
                 </div>
 
             </main>
