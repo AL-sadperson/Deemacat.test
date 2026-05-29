@@ -1,0 +1,39 @@
+body {
+    background-color: #000;
+    color: #ffd700; /* أصفر بيل المميز */
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    transition: background 0.5s;
+}
+
+.container {
+    border: 2px solid #ffd700;
+    padding: 50px;
+    box-shadow: 0 0 20px #ffd700;
+}
+
+.eye {
+    width: 100px;
+    height: 60px;
+    background: #ffd700;
+    border-radius: 50%;
+    margin: 20px auto;
+    animation: blink 3s infinite;
+}
+
+@keyframes blink {
+    0%, 90%, 100% { transform: scaleY(1); }
+    95% { transform: scaleY(0.1); }
+}
+
+button {
+    background: #000;
+    color: #ffd700;
+    border: 1px solid #ffd700;
+    padding: 10px 20px;
+    cursor: pointer;
+}
