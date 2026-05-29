@@ -1,21 +1,24 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CIPHER_GLOBAL // INITIALIZING</title>
     <style>
+        /* --- المتغيرات والألوان --- */
         :root {
             --bg-dark: #000000;
             --panel-amber: #cca300;
             --text-gold: #ffcc00;
             --text-dim: #8a816f;
             --blood-red: #b30000;
+            --border-heavy: #332900;
+            --bg-panel: #050400;
         }
 
-        body { background: #000; margin: 0; padding: 0; overflow: hidden; font-family: 'Courier New', Courier, monospace; }
+        body { background: #000; margin: 0; padding: 0; overflow: hidden; font-family: 'Courier New', Courier, monospace; text-transform: uppercase; }
 
-        /* شاشة الترحيب الأولية */
+        /* --- 1. شاشة الترحيب (Boot Screen) --- */
         #boot-screen {
             position: fixed; top:0; left:0; width:100%; height:100%;
             background: #000; z-index: 10000; display: flex;
@@ -23,17 +26,14 @@
             color: var(--text-gold); text-align: center;
         }
 
-        .crt-noise {
-            animation: turn-on 1.5s ease-out forwards;
-        }
-
+        .crt-noise { animation: turn-on 1.5s ease-out forwards; }
         @keyframes turn-on {
             0% { transform: scale(1, 0.001); filter: brightness(10); opacity: 1; }
             50% { transform: scale(1, 0.001); filter: brightness(10); opacity: 1; }
             100% { transform: scale(1, 1); filter: brightness(1); opacity: 1; }
         }
 
-        #manifesto-text { max-width: 600px; padding: 20px; border: 1px solid var(--panel-amber); }
+        #manifesto-text { max-width: 600px; padding: 30px; border: 1px solid var(--panel-amber); background: rgba(0,0,0,0.8); }
 
         .accept-btn {
             margin-top: 30px; padding: 15px 40px; background: transparent;
@@ -41,7 +41,6 @@
             cursor: pointer; font-size: 1.2em; transition: 0.3s;
         }
         .accept-btn:hover { background: var(--text-gold); color: #000; }
-
         /* إخفاء النظام الرئيسي في البداية */
         #main-system { display: none; }
     </style>
