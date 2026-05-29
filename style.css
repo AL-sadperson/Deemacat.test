@@ -1,39 +1,66 @@
 body {
-    background-color: #000;
-    color: #ffd700; /* أصفر بيل المميز */
-    font-family: 'Courier New', Courier, monospace;
+    background: radial-gradient(circle, #2a0000 0%, #000 100%);
+    color: #ffd700;
+    font-family: 'Creepster', cursive;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    text-align: center;
-    transition: background 0.5s;
+    overflow: hidden;
 }
 
-.container {
-    border: 2px solid #ffd700;
-    padding: 50px;
-    box-shadow: 0 0 20px #ffd700;
-}
-
-.eye {
-    width: 100px;
-    height: 60px;
+/* تأثير العين */
+.bill-eye {
+    width: 120px;
+    height: 80px;
     background: #ffd700;
     border-radius: 50%;
-    margin: 20px auto;
-    animation: blink 3s infinite;
+    margin: 30px auto;
+    position: relative;
+    box-shadow: 0 0 50px #ffd700;
+    animation: pulse 2s infinite;
 }
 
-@keyframes blink {
-    0%, 90%, 100% { transform: scaleY(1); }
-    95% { transform: scaleY(0.1); }
+.bill-eye::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: black;
+    border-radius: 50%;
+    top: 30px;
+    left: 50px;
+}
+
+/* تأثير الـ Glitch */
+.glitch {
+    position: relative;
+    font-size: 3rem;
+    animation: glitch-anim 2s infinite;
+}
+
+@keyframes glitch-anim {
+    0% { text-shadow: 2px 0 red, -2px 0 blue; }
+    50% { text-shadow: -2px 0 red, 2px 0 blue; }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
 }
 
 button {
-    background: #000;
+    background: transparent;
     color: #ffd700;
-    border: 1px solid #ffd700;
-    padding: 10px 20px;
+    border: 2px solid #ffd700;
+    padding: 15px 30px;
     cursor: pointer;
+    font-size: 1.2rem;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #ffd700;
+    color: black;
+    box-shadow: 0 0 20px #ffd700;
 }
