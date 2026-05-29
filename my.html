@@ -243,7 +243,7 @@
             100% { transform: translate(1px, -2px) rotate(-1deg); }
         }
 /* ========================= */
-/* MOBILE RESPONSIVE VERSION */
+/* MOBILE TERMINAL VERSION   */
 /* ========================= */
 
 @media (max-width: 768px) {
@@ -251,70 +251,169 @@
     body{
         overflow-y:auto;
         height:auto;
+        padding:12px;
+        background:#000;
+    }
+
+    #tv-screen{
+        border:3px solid var(--panel-amber);
+        outline:1px solid #ffcc00;
+        outline-offset:-8px;
+        background:#050400;
+        min-height:100vh;
+        box-shadow:
+        0 0 25px rgba(255,200,0,0.2),
+        inset 0 0 30px rgba(255,180,0,0.08);
     }
 
     header{
-        padding:15px;
-        flex-direction:column;
-        align-items:flex-start;
-        gap:15px;
+        padding:30px 18px;
+        flex-direction:row;
+        align-items:center;
+        justify-content:space-between;
+        border-bottom:1px solid #2a2200;
     }
 
     .brand-zone{
-        width:100%;
+        gap:15px;
+        align-items:center;
+    }
+
+    .bill-eye-logo{
+        width:70px;
+        height:70px;
     }
 
     .brand-titles h1{
-        font-size:1.1em;
-        letter-spacing:2px;
-        word-break:break-word;
+        font-size:2.1em;
+        line-height:1.05;
+        letter-spacing:4px;
+    }
+
+    .brand-titles p{
+        font-size:0.75em !important;
+        margin-top:10px !important;
+    }
+
+    header div:last-child{
+        font-size:0.8em !important;
+        text-align:right;
+        line-height:1.5;
     }
 
     .workspace{
         display:block;
     }
 
+    /* القائمة */
+
     .control-panel{
-        border-right:none;
-        border-bottom:2px solid var(--border-heavy);
+        border:none;
+        border-bottom:1px solid #221800;
 
-        flex-direction:row;
-        overflow-x:auto;
-        overflow-y:hidden;
+        display:flex;
+        flex-direction:column;
 
-        white-space:nowrap;
-        padding:15px;
-        gap:10px;
+        gap:14px;
+
+        padding:22px;
+
+        overflow:visible;
     }
 
     .nav-link{
-        min-width:220px;
-        flex-shrink:0;
-        font-size:0.8em;
+        width:100%;
+        min-width:unset;
+
+        padding:18px;
+
+        font-size:1.2em;
+        letter-spacing:3px;
+
+        background:#070500;
+
+        border:1px dashed #332900;
+
+        color:#7f7560;
+
+        text-align:left;
+
+        transition:0.2s;
     }
 
+    .nav-link.active,
+    .nav-link:hover{
+
+        background:
+        repeating-linear-gradient(
+            0deg,
+            #d19b00,
+            #d19b00 2px,
+            #b88400 2px,
+            #b88400 4px
+        );
+
+        color:#000;
+
+        border:1px solid #ffcc00;
+
+        box-shadow:
+        0 0 12px rgba(255,200,0,0.5);
+
+        transform:none;
+    }
+
+    .cult-quote{
+        margin-top:18px;
+        padding-top:25px;
+        font-size:0.9em;
+        line-height:2;
+    }
+
+    /* المحتوى */
+
     .content-area{
-        padding:20px;
-        overflow-y:visible;
+        padding:28px;
+        overflow:visible;
     }
 
     h2{
-        font-size:1.4em;
-        line-height:1.5;
+        font-size:2.2em;
+        line-height:1.2;
+        letter-spacing:3px;
+        margin-bottom:25px;
+    }
+
+    .manifesto-box{
+        padding:22px;
+        font-size:1em;
+        line-height:2;
+        border:1px solid #443300;
+        background:rgba(255,180,0,0.03);
     }
 
     .inline-img{
         float:none;
+
         width:100%;
-        margin:0 0 20px 0;
+
+        margin:25px 0;
+
+        border:2px dashed #8b0000;
+
+        filter:
+        grayscale(100%)
+        sepia(60%)
+        contrast(1.4);
     }
 
     .image-gallery{
         grid-template-columns:1fr;
+        gap:25px;
     }
 
-    .glitch-text{
-        font-size:2em;
+    .creepy-img{
+        border:2px dashed #8b0000;
     }
 
     table{
@@ -322,6 +421,12 @@
         overflow-x:auto;
         white-space:nowrap;
     }
+
+    .glitch-text{
+        font-size:3em;
+        line-height:1.2;
+    }
+
 }
     </style>
 </head>
