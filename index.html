@@ -1,46 +1,72 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIPHER GLOBAL // THE WIRED CULT</title>
+    <title>CIPHER_GLOBAL // INITIALIZING</title>
     <style>
-        /* لوحة الألوان الأساسية */
         :root {
             --bg-dark: #000000;
             --panel-amber: #cca300;
             --text-gold: #ffcc00;
             --text-dim: #8a816f;
             --blood-red: #b30000;
-            --border-heavy: #332900;
-            --bg-panel: #050400;
         }
 
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-dim);
-            font-family: 'Courier New', Courier, monospace;
-            margin: 0;
-            padding: 0;
-            text-transform: uppercase;
-            overflow: hidden; /* لمنع التمرير الخارجي أثناء تأثير التلفاز */
-            height: 100vh;
-        }
+        body { background: #000; margin: 0; padding: 0; overflow: hidden; font-family: 'Courier New', Courier, monospace; }
 
-        /* -------------------------------------- */
-        /* تأثير تشغيل التلفاز (CRT Turn On Effect) */
-        /* -------------------------------------- */
-      /* شاشة الترحيب (TV Boot) */
+        /* شاشة الترحيب الأولية */
         #boot-screen {
-            position: fixed; top:0; left:0; width: 100vw; height: 100vh;
-            background: #000; z-index: 10000; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; text-align: center;
+            position: fixed; top:0; left:0; width:100%; height:100%;
+            background: #000; z-index: 10000; display: flex;
+            flex-direction: column; justify-content: center; align-items: center;
+            color: var(--text-gold); text-align: center;
         }
-        .boot-text { color: var(--gold); font-size: 1.5em; margin-bottom: 20px; }
-        .boot-btn { padding: 15px 30px; background: transparent; border: 1px solid var(--gold); color: var(--gold); cursor: pointer; }
-        
-        /* إخفاء النظام حتى الضغط على الموافقة */
-        #main-system { display: none; height: 100vh; grid-template-columns: 250px 1fr; }
+
+        .crt-noise {
+            animation: turn-on 1.5s ease-out forwards;
+        }
+
+        @keyframes turn-on {
+            0% { transform: scale(1, 0.001); filter: brightness(10); opacity: 1; }
+            50% { transform: scale(1, 0.001); filter: brightness(10); opacity: 1; }
+            100% { transform: scale(1, 1); filter: brightness(1); opacity: 1; }
+        }
+
+        #manifesto-text { max-width: 600px; padding: 20px; border: 1px solid var(--panel-amber); }
+
+        .accept-btn {
+            margin-top: 30px; padding: 15px 40px; background: transparent;
+            color: var(--text-gold); border: 2px solid var(--text-gold);
+            cursor: pointer; font-size: 1.2em; transition: 0.3s;
+        }
+        .accept-btn:hover { background: var(--text-gold); color: #000; }
+
+        /* إخفاء النظام الرئيسي في البداية */
+        #main-system { display: none; }
+    </style>
+</head>
+<body>
+
+    <div id="boot-screen" class="crt-noise">
+        <div id="manifesto-text">
+            <h2>CIPHER_GLOBAL // ACCESS_PROTOCOL</h2>
+            <p>BY ENTERING THIS TERMINAL, YOU ACKNOWLEDGE THAT REALITY IS A CONSTRUCT SUBJECT TO OUR MODIFICATION.</p>
+            <p>WE DO NOT OFFER PRODUCTS. WE OFFER AWARENESS. DO YOU ACCEPT THE TERMS OF THE WIRED?</p>
+            <button class="accept-btn" onclick="initializeSystem()">AGREE / INITIALIZE</button>
+        </div>
+    </div>
+
+    <div id="main-system">
+        <h1>SYSTEM ACTIVE</h1>
+    </div>
+
+    <script>
+        function initializeSystem() {
+            document.getElementById('boot-screen').style.display = 'none';
+            document.getElementById('main-system').style.display = 'block';
+        }
+    </script>
         
 
         /* تأثير الخطوط القديمة على الشاشة بالكامل */
