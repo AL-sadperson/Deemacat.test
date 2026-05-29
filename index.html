@@ -3,286 +3,327 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Book of Bill - النسخة المحرمة</title>
-    <!-- استدعاء خط عربي كلاسيكي ليعطي طابع الكتب القديمة -->
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <title>The Book of Bill: Weirdmageddon II (نسخة الويب الملعونة)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Amiri:wght@700&family=Shadows+Into+Light&display=swap" rel="stylesheet">
     <style>
-        /* إعدادات الصفحة - الظلام والغموض */
+        /* إعدادات الخلفية لتشبه الورق القديم المحروق */
         body {
-            background-color: #050505;
-            background-image: radial-gradient(circle at center, #1a0000 0%, #000000 100%);
-            color: #d4af37; /* لون ذهبي باهت */
+            background-color: #050000;
+            background-image: url('https://www.transparenttextures.com/patterns/aged-paper.png'), radial-gradient(circle at center, #1a0000 0%, #000000 100%);
+            color: #d4af37;
             font-family: 'Amiri', serif;
             margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            padding: 20px;
             overflow-x: hidden;
-            cursor: crosshair; /* تغيير شكل الماوس */
+            cursor: crosshair;
         }
 
-        /* تصميم الكتاب */
-        .grimoire-container {
-            background: url('https://www.transparenttextures.com/patterns/aged-paper.png'), #110a0a;
-            max-width: 800px;
-            width: 90%;
-            margin: 40px 0;
-            padding: 50px;
-            border: 2px solid #5a0000;
-            box-shadow: 0 0 40px rgba(139, 0, 0, 0.5), inset 0 0 50px rgba(0, 0, 0, 0.9);
+        /* حاوية الكتاب: تبدو كصفحة فوضوية */
+        .book-of-bill-page {
+            max-width: 1000px;
+            margin: 0 auto;
             position: relative;
-            border-radius: 10px;
-            transition: all 1s ease;
+            padding: 50px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
         }
 
-        /* العين المراقبة (التفاعلية) */
-        .all-seeing-eye {
-            width: 100px;
-            height: 50px;
+        /* العين الساهرة التي تتحرك */
+        .eye-container {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 80px;
+            height: 60px;
             background: #fff;
             border-radius: 50%;
             border: 4px solid #d4af37;
-            position: relative;
-            margin: 0 auto 30px auto;
-            box-shadow: inset 0 0 15px #000, 0 0 20px #ffcc00;
+            box-shadow: 0 0 20px #ffcc00;
+            z-index: 1000;
             overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
-        .iris {
-            width: 30px;
-            height: 45px;
+        .eye-pupil {
+            width: 25px;
+            height: 40px;
             background: #000;
             border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease-out;
             box-shadow: 0 0 10px #ff0000;
-            transition: transform 0.1s ease-out; /* حركة ناعمة */
         }
 
-        /* العناوين والخطوط */
-        h1 {
+        /* عنوان الموقع بخطوط وألوان متعددة */
+        .page-header {
             text-align: center;
-            font-size: 3.5rem;
-            color: #8b0000;
-            text-shadow: 2px 2px 5px #000;
-            margin-bottom: 10px;
-            letter-spacing: 2px;
             border-bottom: 2px dashed #5a0000;
             padding-bottom: 20px;
         }
 
-        p {
-            font-size: 1.4rem;
-            line-height: 1.8;
-            color: #c2a77d;
-            text-align: justify;
+        h1 {
+            font-size: 3rem;
+            color: #8b0000;
+            text-shadow: 0 0 10px red;
+            margin: 0;
+            text-transform: uppercase;
         }
 
-        /* النصوص المشفرة */
-        .cipher-block {
-            background: rgba(0, 0, 0, 0.6);
-            border-right: 4px solid #d4af37;
-            padding: 20px;
-            margin: 30px 0;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .cipher-block::before {
-            content: "مرر الماوس لفك التشفير";
-            position: absolute;
-            top: -15px;
-            right: 10px;
-            background: #5a0000;
-            color: #fff;
-            font-size: 0.8rem;
-            padding: 2px 8px;
-            border-radius: 3px;
-        }
-
-        .cipher-text {
+        .sub-header {
             font-family: monospace;
-            font-size: 1.5rem;
-            color: #ff4444;
-            letter-spacing: 3px;
+            color: #ffcc00;
+            font-size: 1.2rem;
+            letter-spacing: 5px;
         }
 
-        /* قائمة العقيدة */
-        .cult-rules {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .cult-rules li {
-            font-size: 1.3rem;
-            margin: 15px 0;
-            padding-right: 30px;
-            position: relative;
-        }
-
-        .cult-rules li::before {
-            content: "◬";
-            position: absolute;
-            right: 0;
-            color: #8b0000;
-            font-size: 1.5rem;
-        }
-
-        /* زر عقد الصفقة */
-        .contract-btn {
-            display: block;
-            width: 100%;
-            background: transparent;
-            color: #8b0000;
-            font-family: 'Amiri', serif;
-            font-size: 2rem;
-            font-weight: bold;
-            padding: 15px;
-            margin-top: 50px;
-            border: 2px solid #8b0000;
+        /* قصاصات الورق الفوضوية */
+        .scrap {
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #5a0000;
+            padding: 20px;
+            box-shadow: 5px 5px 20px rgba(139, 0, 0, 0.5);
+            transition: transform 0.3s;
             cursor: pointer;
-            transition: 0.3s;
-            text-align: center;
         }
 
-        .contract-btn:hover {
-            background: #8b0000;
-            color: #000;
-            box-shadow: 0 0 30px #ff0000;
+        .scrap:hover {
+            transform: rotate(1deg) scale(1.02);
+            box-shadow: 10px 10px 30px rgba(139, 0, 0, 0.8);
+        }
+
+        /* الأسئلة والأجوبة الساخرة */
+        .qa-scrap {
+            font-family: 'Shadows Into Light', cursive;
+            font-size: 1.6rem;
+            transform: rotate(-1deg);
+        }
+
+        .qa-box {
+            border: 1px solid #c2a77d;
+            background: rgba(17, 10, 10, 0.8);
+            margin-bottom: 20px;
+            padding: 15px;
+        }
+
+        .question {
+            color: #ff4444;
+            font-weight: bold;
+        }
+
+        .answer {
+            color: #c2a77d;
+        }
+
+        /* الحقائق الغريبة والأبعاد */
+        .facts-scrap {
+            font-family: monospace;
+            font-size: 1.3rem;
             letter-spacing: 2px;
+            transform: rotate(1deg);
         }
 
-        /* رسالة الرعب النهاية */
-        #doom-message {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 5rem;
-            color: red;
-            z-index: 1000;
-            text-shadow: 0 0 20px red, 0 0 40px darkred;
-            white-space: nowrap;
+        .parallel-dimensions {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
         }
 
-        /* تأثيرات التشويش */
-        .blood-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, rgba(255,0,0,0.2) 0%, rgba(139,0,0,0.8) 100%);
+        .dim-box {
+            width: 100px;
+            height: 100px;
+            background: #fff;
+            border: 4px solid #000;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .dim-box::before {
+            content: "";
+            width: 60px; height: 10px; background: #000;
+            position: absolute; top: -15px; left: 15px;
+        }
+
+        /* بيل بأشكال مختلفة */
+        #bill-rect { background: cyan; border-radius: 5px; }
+        #bill-tri-pink { border-left: 50px solid transparent; border-right: 50px solid transparent; border-bottom: 86px solid magenta; width: 0; height: 0; background: transparent; border-radius: 0; }
+        #bill-tri-green { border-left: 50px solid transparent; border-right: 50px solid transparent; border-bottom: 86px solid lime; width: 0; height: 0; background: transparent; border-radius: 0; }
+        #bill-tri-gold { border-left: 50px solid transparent; border-right: 50px solid transparent; border-bottom: 86px solid gold; width: 0; height: 0; background: transparent; border-radius: 0; box-shadow: 0 0 20px gold; }
+
+        /* الشارات والشفرات */
+        .badges-scrap {
+            text-align: center;
+            transform: rotate(-2deg);
+        }
+
+        .badge {
+            display: inline-block;
+            background: #8b0000;
+            color: #fff;
+            font-family: 'Press Start 2P', cursive;
+            padding: 10px 20px;
+            margin: 10px;
+            text-shadow: 2px 2px 5px #000;
+            cursor: pointer;
+        }
+
+        .cipher {
+            font-family: 'Press Start 2P', cursive;
+            color: #ffcc00;
+            letter-spacing: 5px;
+            font-size: 0.8rem;
+            display: none; /* مخفي في البداية */
+        }
+
+        /* المجلة الزائفة */
+        .magazine-scrap {
+            transform: rotate(2deg);
+        }
+
+        .mag-title {
+            font-family: 'Shadows Into Light', cursive;
+            font-size: 3rem;
+            color: magenta;
+            text-shadow: 0 0 10px magenta;
+            border: 4px double cyan;
+            padding: 10px;
+            display: inline-block;
+        }
+
+        .mag-contents {
+            margin-top: 20px;
+            font-family: monospace;
+            color: cyan;
+        }
+
+        /* الخربشات اليدوية والأسهم */
+        .scribble {
+            position: absolute;
+            font-family: 'Shadows Into Light', cursive;
+            font-size: 1.5rem;
+            color: rgba(255, 0, 0, 0.7);
             pointer-events: none;
-            opacity: 0;
-            z-index: 999;
-            transition: opacity 1s ease;
+        }
+
+        .hot { top: 300px; right: 50px; transform: rotate(10deg); }
+        .buy-gold { bottom: 50px; left: 100px; transform: rotate(-10deg); }
+        .arrow { font-size: 3rem; top: 150px; right: 100px; }
+
+        /* التوقيع */
+        .signature {
+            font-family: 'Amiri', serif;
+            font-size: 3rem;
+            color: red;
+            text-align: center;
+            margin-top: 50px;
+            text-shadow: 0 0 10px red;
+            border: 2px solid red;
+            display: inline-block;
+            padding: 10px;
         }
 
     </style>
 </head>
 <body>
 
-    <div class="blood-overlay" id="blood"></div>
-    <div id="doom-message">الآن أنت ملكي</div>
+    <div class="eye-container">
+        <div class="eye-pupil" id="eye-pupil"></div>
+    </div>
 
-    <div class="grimoire-container" id="book">
-        <!-- العين التفاعلية -->
-        <div class="all-seeing-eye">
-            <div class="iris" id="eye-pupil"></div>
-        </div>
+    <div class="scribble hot">ساخن</div>
+    <div class="scribble buy-gold">اشترِ الذهب... الأوراق النقدية ستحترق قريباً.</div>
+    <div class="scribble arrow">→</div>
 
-        <h1>كـتـاب بـيـل</h1>
+    <div class="book-of-bill-page">
         
-        <p>لا تقرأ هذه الكلمات بصوت عالٍ. بمجرد أن تقع عيناك على هذه المخطوطة، فقد تم فتح الرابط الذهني بينك وبينه. البعد الثالث يحتضر، والجاذبية ليست سوى كذبة اخترعها الضعفاء.</p>
-
-        <!-- نص مشفر يتفاعل مع الماوس -->
-        <div class="cipher-block" onmouseenter="decodeText(this, 'نحن لا ننام، نحن ننتظر في المسافة بين الأبعاد. ستانفورد باينز كان مجرد أداة. احرقوا جميع سجلاته.')" onmouseleave="encodeText(this)">
-            <div class="cipher-text">ثصط لا ظصام، ثصط ظصتطر في الـدسافة بيط الأبجاد. ستانفـورد باينـز كـان مجـرد أداة. احـرقوا جميـج سجلاتـه.</div>
+        <div class="page-header">
+            <h1>كـتـاب بـيـل</h1>
+            <div class="sub-header">بوابة العبور إلى الأبعاد المتوازية</div>
         </div>
 
-        <h2>عقيدة العين الساهرة:</h2>
-        <ul class="cult-rules">
-            <li>الكون هولوغرام، والواقع وهم.</li>
-            <li>الجسد مجرد وعاء هش، العقل هو البوابة الحقيقية.</li>
-            <li>المثلث هو الشكل الهندسي الوحيد الذي يمثل الكمال المطلق.</li>
-            <li>اشترِ الذهب... الأوراق النقدية ستحترق قريباً.</li>
-        </ul>
+        <div class="scrap qa-scrap">
+            <div class="qa-box">
+                <span class="question">س: هل تندم على إطلاق الغرابة الأبدية (Weirdmageddon)؟</span>
+                <span class="answer">ب: الندم؟ هل تبدو كتعبير لوجهي؟ أنا في ذروة تألقي! الأبعاد الثلاثة مجرد سجن هش، والجاذبية كذبة!</span>
+            </div>
+            <div class="qa-box">
+                <span class="question">س: هل صحيح أنك مؤلف "The Journal 3"؟</span>
+                <span class="answer">ب: لا، أنا لست أحمقاً. كان ذلك الكائن البائس "ستانفورد باينز". أنا هنا فقط لأخرب عمله وأراقبك...</span>
+            </div>
+            <div class="scribble arrow">→</div>
+        </div>
 
-        <!-- زر توقيع العقد -->
-        <button class="contract-btn" onclick="signContract()">أوافق على تسليم إرادتي</button>
+        <div class="scrap facts-scrap">
+            <div>حقيقة غريبة: الأبعاد المتوازية هي فوضى جميلة. أنا أراقبها كلها.</div>
+            <div class="parallel-dimensions">
+                <div class="dim-box" id="bill-tri-gold" title="ملك الغرابة" onclick="changeBillAppearance(this)"></div>
+                <div class="dim-box" id="bill-tri-green" title="حسد المثلث" onclick="changeBillAppearance(this)"></div>
+                <div class="dim-box" id="bill-tri-pink" title="حب المثلث" onclick="changeBillAppearance(this)"></div>
+                <div class="dim-box" id="bill-rect" title="أنا مربع؟ (نحن لا نتحدث عن هذا البعد)" onclick="changeBillAppearance(this)"></div>
+            </div>
+            <p>انقر على المثلثات لتغيير مظهرك... إذا تجرأت!</p>
+        </div>
+
+        <div class="scrap badges-scrap">
+            <div class="badge" onclick="revealCipher()">اشترِ الذهب</div>
+            <div class="badge" onclick="revealCipher()">وقع هنا بدمك</div>
+            <div class="badge" onclick="revealCipher()">أوافق على تسليم إرادتي</div>
+            <p class="cipher" id="cipher-text">WKH XQLYHUVH LV D KRORJUDP</p>
+            <p>(هذه شفرة سيزر خفية... فككها إذا استطعت!)</p>
+        </div>
+
+        <div class="scrap magazine-scrap">
+            <div class="mag-title">THE BOOK OF BILL: Weirdmageddon II</div>
+            <div class="mag-contents">
+                <ul>
+                    <li>تخلص من الكيلوجرامات عن طريق التخلي عن جسدك المادي!</li>
+                    <li>كيف تستحوذ على عقل مراهق في ثلاث خطوات بسيطة!</li>
+                    <li>لماذا المثلث هو الشكل الهندسي الوحيد الذي يمثل الكمال المطلق؟</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="scrap">
+            <div>بمجرد أن تقرأ هذه الكلمات، فقد تم فتح الرابط الذهني بينك وبيني. نحن واحد الآن.</div>
+            <div class="signature">بـيـل سـايـفـر</div>
+        </div>
+
     </div>
 
     <script>
-        // 1. برمجة العين لتتبع مؤشر الماوس
+        // 1. تحريك العين مع مؤشر الماوس
         document.addEventListener('mousemove', (e) => {
             const iris = document.getElementById('eye-pupil');
-            // حساب موضع العين في الشاشة
             const rect = iris.getBoundingClientRect();
             const eyeX = rect.left + (rect.width / 2);
             const eyeY = rect.top + (rect.height / 2);
-            
-            // حساب الزاوية بين الماوس والعين
             const rad = Math.atan2(e.pageX - eyeX, e.pageY - eyeY);
             const rot = (rad * (180 / Math.PI) * -1) + 180;
-            
-            // تحريك البؤبؤ
             iris.style.transform = `rotate(${rot}deg) translateY(10px)`;
         });
 
-        // 2. دالة فك التشفير عند التمرير
-        // تقوم بعمل تأثير اختراق (Matrix) سريع قبل إظهار النص الأصلي
-        function decodeText(element, realText) {
-            const targetDiv = element.querySelector('.cipher-text');
-            targetDiv.style.color = "#ffcc00"; // يتغير للذهبي
-            let iterations = 0;
-            const interval = setInterval(() => {
-                targetDiv.innerText = targetDiv.innerText.split("")
-                    .map((letter, index) => {
-                        if(index < iterations) {
-                            return realText[index];
-                        }
-                        return String.fromCharCode(1570 + Math.random() * 40); // أحرف عربية عشوائية
-                    }).join("");
-                
-                if(iterations >= realText.length){
-                    clearInterval(interval);
-                }
-                iterations += 1;
-            }, 30);
-            
-            // حفظ النص الأصلي المشفر في خاصية للعودة إليه
-            element.dataset.cipher = targetDiv.innerText;
-        }
-
-        // 3. إعادة التشفير عند إبعاد الماوس
-        function encodeText(element) {
-            const targetDiv = element.querySelector('.cipher-text');
-            targetDiv.style.color = "#ff4444";
-            targetDiv.innerText = "ثصط لا ظصام، ثصط ظصتطر في الـدسافة بيط الأبجاد. ستانفـورد باينـز كـان مجـرد أداة. احـرقوا جميـج سجلاتـه.";
-        }
-
-        // 4. حدث توقيع العقد (التأثير المرعب)
-        function signContract() {
-            const book = document.getElementById('book');
-            const blood = document.getElementById('blood');
-            const msg = document.getElementById('doom-message');
-
-            // إخفاء الكتاب وتغيير الألوان
-            book.style.transform = "scale(0.8)";
-            book.style.opacity = "0.2";
-            blood.style.opacity = "1";
-            document.body.style.backgroundColor = "#2a0000";
-
-            // إظهار رسالة النهاية
+        // 2. تغيير مظهر المثلثات عند النقر عليها
+        function changeBillAppearance(element) {
+            const originalTitle = element.title;
+            const originalColor = window.getComputedStyle(element).backgroundColor;
+            element.style.transform = "scale(1.2)";
+            element.title = "تم تعديل الوعاء الذهني!";
             setTimeout(() => {
-                book.style.display = "none";
-                msg.style.display = "block";
-            }, 1000);
-            
-            // إخفاء مؤشر الماوس
-            document.body.style.cursor = "none";
+                element.style.transform = "scale(1)";
+                element.title = originalTitle;
+            }, 500);
+        }
+
+        // 3. كشف الشفرة عند النقر على الشارات
+        function revealCipher() {
+            const cipher = document.getElementById('cipher-text');
+            cipher.style.display = "block";
+            cipher.innerText = "WKH XQLYHUVH LV D KRORJUDP"; // شفرة سيزر لـ "THE UNIVERSE IS A HOLOGRAM"
+            setTimeout(() => {
+                cipher.style.display = "none";
+            }, 3000);
         }
     </script>
 
