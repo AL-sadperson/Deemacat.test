@@ -1,259 +1,284 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Wired - Terminal Layout</title>
+    <title>CLASSIFIED // CASE FILE</title>
     <style>
-        /* إعدادات الألوان والخطوط الأساسية */
-        :root {
-            --bg-color: #070707;
-            --text-main: #a3a3a3;
-            --text-green: #39ff14; /* اللون الأخضر النيون */
-            --border-color: #333;
-            --border-light: #555;
-        }
-
+        /* إعدادات الخلفية لتشبه سطح المكتب */
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: 'Courier New', Courier, monospace;
+            background-color: #1a1a1a;
             margin: 0;
-            padding: 20px;
-            line-height: 1.6;
-            text-transform: uppercase; /* جعل كل النصوص بأحرف كبيرة كالتصميم الأصلي */
-        }
-
-        /* حاوية الموقع الأساسية */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 30px;
-        }
-
-        /* تصميم الـ Header العلوي */
-        header {
-            grid-column: 1 / -1;
-            border-bottom: 2px dashed var(--border-light);
-            padding-bottom: 10px;
-            margin-bottom: 10px;
+            padding: 40px 20px;
             display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
+            justify-content: center;
         }
 
-        header h1 {
+        /* حاوية الورقة (الملف السري) */
+        .document {
+            background-color: #f4f1ea; /* لون ورق قديم */
+            width: 100%;
+            max-width: 850px;
+            padding: 40px 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            font-family: 'Courier New', Courier, monospace; /* خط الآلة الكاتبة */
+            color: #111;
+            position: relative;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.03"><rect width="100" height="100" fill="none"/><circle cx="50" cy="50" r="40" stroke="%23000" stroke-width="2"/></svg>'); /* تأثير نسيج خفيف */
+        }
+
+        /* الترويسة العلوية */
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #111;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
             margin: 0;
             font-size: 2.5em;
             letter-spacing: 5px;
-            color: #fff;
+            text-transform: uppercase;
         }
 
-        .sub-header {
-            font-size: 0.7em;
-            color: #666;
-            letter-spacing: 2px;
-        }
-
-        /* الصناديق والإطارات */
-        .box {
-            border: 1px solid var(--border-color);
-            padding: 20px;
-            margin-bottom: 20px;
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        .box-green {
-            border: 1px solid var(--text-green);
-        }
-
-        .box-title {
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 5px;
-            margin-bottom: 15px;
+        .header .warning {
+            font-size: 0.9em;
             font-weight: bold;
-            letter-spacing: 1px;
-            color: #fff;
+            margin-top: 10px;
+            text-transform: uppercase;
         }
 
-        /* القائمة الجانبية (Sidebar) */
-        .profile {
-            display: flex;
-            align-items: center;
-            gap: 15px;
+        /* شبكة المعلومات (الجدول والصورة) */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
         }
 
-        .avatar {
-            width: 70px;
-            height: 70px;
-            border: 1px dotted var(--text-green);
+        /* جدول البيانات */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 2px solid #111;
+        }
+
+        th, td {
+            border: 1px solid #111;
+            padding: 8px 12px;
+            text-align: left;
+            font-size: 0.9em;
+        }
+
+        th {
+            background-color: rgba(0, 0, 0, 0.05);
+            width: 35%;
+            text-transform: uppercase;
+        }
+
+        /* حاوية الصورة الملصقة */
+        .photo-container {
+            position: relative;
+            background: #e0e0e0;
+            border: 1px solid #999;
+            height: 250px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--text-green);
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .photo-placeholder {
+            color: #666;
             font-size: 0.8em;
+            text-align: center;
         }
 
-        .green-text {
-            color: var(--text-green);
+        /* الشريط اللاصق (Tape) */
+        .tape {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-2deg);
+            width: 80px;
+            height: 25px;
+            background-color: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            z-index: 10;
         }
 
-        .nav-links {
+        /* النصوص والمحتوى */
+        .content h3 {
+            border-bottom: 1px solid #111;
+            padding-bottom: 5px;
+            margin-top: 30px;
+            text-transform: uppercase;
+        }
+
+        .content p {
+            line-height: 1.6;
+            font-size: 0.95em;
+            text-align: justify;
+        }
+
+        /* الكلمات المشفرة / المحذوفة (Redacted) */
+        .redacted {
+            background-color: #111;
+            color: #111; /* جعل النص بنفس لون الخلفية لإخفائه تماماً */
+            padding: 0 5px;
+            display: inline-block;
+            user-select: none; /* منع تحديد النص */
+        }
+
+        /* الختم السري (Stamp) */
+        .stamp {
+            position: absolute;
+            top: 50px;
+            right: 40px;
+            color: #c1121f;
+            border: 4px solid #c1121f;
+            font-size: 2em;
+            font-weight: bold;
+            padding: 5px 15px;
+            transform: rotate(-15deg);
+            opacity: 0.8;
+            letter-spacing: 4px;
+            pointer-events: none; /* لمنع تفاعل الماوس معه */
+        }
+
+        /* الملاحظات المكتوبة بخط اليد */
+        .handwriting {
+            font-family: 'Brush Script MT', cursive;
+            color: #2b2b2b;
+            font-size: 1.5em;
+            transform: rotate(-2deg);
             margin-top: 20px;
+        }
+
+        /* البصمات (وهمية) */
+        .fingerprints {
+            margin-top: 40px;
             display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .nav-btn {
-            border: 1px solid var(--text-green);
-            color: var(--text-green);
-            padding: 5px 10px;
-            text-decoration: none;
-            font-size: 0.8em;
-            transition: 0.2s;
-        }
-
-        .nav-btn:hover {
-            background: var(--text-green);
-            color: #000;
-        }
-
-        /* قسم المحتوى الرئيسي */
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
             gap: 20px;
         }
 
-        .image-placeholder {
-            width: 100%;
-            height: 250px;
-            border: 1px solid var(--border-light);
+        .print-box {
+            width: 80px;
+            height: 100px;
+            border: 1px dashed #666;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #555;
-            margin-bottom: 15px;
-            background: repeating-linear-gradient(
-                45deg,
-                #0a0a0a,
-                #0a0a0a 10px,
-                #111 10px,
-                #111 20px
-            ); /* تأثير الخطوط الخلفية */
-        }
-
-        p {
-            text-align: justify;
-            font-size: 0.85em;
-            margin-top: 0;
-        }
-
-        /* الباركود المزيف والمعلومات السفلية */
-        .barcode {
-            font-size: 2em;
-            letter-spacing: -2px;
-            color: #fff;
-            margin-bottom: 10px;
-        }
-
-        .sys-status {
             font-size: 0.7em;
-            border-top: 1px dashed var(--border-color);
-            padding-top: 10px;
-            color: #666;
-            text-align: center;
-            margin-top: 20px;
+            color: #888;
         }
 
-        /* التصميم المتجاوب للهواتف */
-        @media (max-width: 800px) {
-            .container {
+        /* التجاوب مع الهواتف */
+        @media (max-width: 768px) {
+            .info-grid {
                 grid-template-columns: 1fr;
             }
-            .content-grid {
-                grid-template-columns: 1fr;
+            .document {
+                padding: 20px;
             }
-            header {
-                flex-direction: column;
-                align-items: flex-start;
+            .stamp {
+                font-size: 1.5em;
+                top: 20px;
+                right: 10px;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <h1>lain</h1>
-            <div class="sub-header">SERIAL EXPERIMENTS // NO MATTER WHERE YOU GO</div>
-        </header>
+    <div class="document">
+        
+        <!-- الختم الأحمر -->
+        <div class="stamp">TOP SECRET</div>
 
-        <aside class="sidebar">
-            <div class="box box-green">
-                <div class="profile">
-                    <div class="avatar">IMG</div>
-                    <div class="green-text" style="font-size: 0.75em; text-transform: lowercase;">
-                        lord_pm2.5<br>
-                        i keep thinking<br>about these things
-                    </div>
+        <!-- الترويسة -->
+        <div class="header">
+            <h1 style="margin: 0; font-size: 1.2em; color: #555;">DEPARTMENT OF ANOMALOUS INVESTIGATIONS</h1>
+            <h1 style="margin-top: 10px;">CASE FILE: #849-B</h1>
+            <div class="warning">Only Authorised Personnel May Open This File.<br>Unauthorized access is strictly prohibited.</div>
+        </div>
+
+        <!-- شبكة المعلومات والصورة -->
+        <div class="info-grid">
+            <div>
+                <table>
+                    <tr>
+                        <th>Subject Name:</th>
+                        <td><span class="redacted">John Doe</span> (Alias: "The Architect")</td>
+                    </tr>
+                    <tr>
+                        <th>Clearance Level:</th>
+                        <td>Level 4 (Restricted)</td>
+                    </tr>
+                    <tr>
+                        <th>Date of Birth:</th>
+                        <td>14/09/1984</td>
+                    </tr>
+                    <tr>
+                        <th>Location:</th>
+                        <td>Sector <span class="redacted">7G</span>, Sub-level 3</td>
+                    </tr>
+                    <tr>
+                        <th>Status:</th>
+                        <td><strong>CONTAINED</strong></td>
+                    </tr>
+                    <tr>
+                        <th>Incident Date:</th>
+                        <td>24th March, 2025</td>
+                    </tr>
+                </table>
+
+                <div class="handwriting">
+                    * Note: Subject exhibits unusual behavior when exposed to <span class="redacted">light</span>. Monitor closely. - Dr. H.
                 </div>
             </div>
 
-            <div class="nav-links">
-                <a href="#" class="nav-btn">home</a>
-                <a href="#" class="nav-btn">about</a>
-                <a href="#" class="nav-btn">books i like</a>
-                <a href="#" class="nav-btn">links out</a>
-            </div>
-
-            <div class="box" style="margin-top: 20px;">
-                <div class="barcode">||||||| | ||| |||| |</div>
-                <p style="font-size: 0.7em; color: #666; margin: 0;">
-                    PRESENT DAY<br>PRESENT TIME<br>HAHAHA<br><br>
-                    AND YOU DON'T SEEM TO UNDERSTAND<br>A SHAME YOU SEEMED AN HONEST MAN
-                </p>
-            </div>
-        </aside>
-
-        <main class="content">
-            
-            <div class="box">
-                <div class="box-title">SERIAL EXPERIMENTS</div>
-                <div class="content-grid">
-                    <div>
-                        <div class="image-placeholder">[ Anime Sketch ]</div>
-                    </div>
-                    <div>
-                        <p>THERE WAS NO REASON FOR ME TO STAY IN THE REAL WORLD ANY LONGER. IN THE REAL WORLD, IT DIDN'T MATTER IF I WAS THERE OR NOT. WHEN I REALIZED THAT, I WAS NO LONGER AFRAID OF LOSING MY BODY.</p>
-                        <p>WHEN IT'S ALL SAID AND DONE, THE WIRED IS JUST A MEDIUM OF COMMUNICATION AND THE TRANSFER OF INFORMATION. YOU MUSTN'T CONFUSE IT WITH THE REAL WORLD.</p>
-                        <div class="image-placeholder" style="height: 100px;">[ 3D Wireframe ]</div>
-                    </div>
+            <!-- مكان الصورة -->
+            <div class="photo-container">
+                <div class="tape"></div>
+                <div class="photo-placeholder">
+                    [ ATTACH PHOTOGRAPH HERE ]<br>
+                    <span style="font-size: 0.8em;">#IMG-0943</span>
                 </div>
             </div>
+        </div>
 
-            <div class="box">
-                <div class="box-title" style="color: var(--text-green); border-bottom-color: var(--text-green);">KNOWLEDGE DISAPPEARS</div>
-                <p class="green-text" style="text-transform: none;">
-                    OLD MANX SAILOR I wonder whether those jolly lads bethink them of what they are dancing over. I'll dance over your grave, I will- that's the bitterest threat of your night-women, that beat head-winds round corners.
-                </p>
+        <!-- الوصف والمحتوى -->
+        <div class="content">
+            <h3>Description</h3>
+            <p>
+                The subject was apprehended on the night of November 12th near the <span class="redacted">REDACTED</span> facility. 
+                Upon initial contact, operatives reported severe signal interference and visual distortions. 
+                Standard restraint protocols were ineffective; containment was only achieved after implementing Procedure <span class="redacted">110-Montauk</span>.
+            </p>
+            <p>
+                Interviews conducted by Dr. <span class="redacted">REDACTED</span> suggest the subject possesses knowledge regarding the structural integrity of the facility. When questioned about the events of 1998, the subject responded only with: "The architecture is already changing."
+            </p>
+
+            <h3>Addendum 01</h3>
+            <p>
+                All physical contact requires Level 4 Hazmat clearance. Do not allow the subject access to any recording devices, analog or digital. As per Directive 4A, if the subject mentions <span class="redacted">the pale horizon</span>, terminate the interview immediately.
+            </p>
+        </div>
+
+        <!-- البصمات -->
+        <div class="fingerprints">
+            <div class="print-box">[Thumb Print]</div>
+            <div class="print-box">[Index Print]</div>
+            <div style="align-self: flex-end; margin-left: auto; font-size: 0.8em; color: #555;">
+                AUTHORIZED SIGNATURE: ____________________
             </div>
+        </div>
 
-            <div class="box">
-                <div class="box-title" style="text-align: center;">ADDITIONAL INFORMATION</div>
-                <p style="text-align: center; color: #888;">
-                    THE WIRED IS EVERYWHERE AND NOWHERE. IT IS THE COLLECTIVE UNCONSCIOUS OF HUMANITY, THE DIGITAL REALM WHERE INFORMATION FLOWS FREELY. BOUNDARIES BETWEEN THE PHYSICAL AND VIRTUAL WORLDS ARE ILLUSIONS CREATED BY LIMITED PERCEPTION. IN REALITY, WE ARE ALL CONNECTED THROUGH THE FLOW OF DATA.
-                </p>
-                <div class="sys-status">
-                    SYSTEM STATUS: CONNECTED | DATA FLOW: OPTIMAL | NETWORK INTEGRITY: 97.4% | CONSCIOUSNESS UPLOAD: IN PROGRESS
-                </div>
-            </div>
-
-        </main>
     </div>
 
 </body>
 </html>
+
