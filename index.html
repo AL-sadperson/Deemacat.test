@@ -1,132 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIPHER_GLOBAL // INITIALIZING</title>
-    <style>
-        /* --- المتغيرات والألوان --- */
-        :root {
-            --bg-dark: #000000;
-            --panel-amber: #cca300;
-            --text-gold: #ffcc00;
-            --text-dim: #8a816f;
-            --blood-red: #b30000;
-            --border-heavy: #332900;
-            --bg-panel: #050400;
-        }
-
-        body { background: #000; margin: 0; padding: 0; overflow: hidden; font-family: 'Courier New', Courier, monospace; text-transform: uppercase; }
-
-        /* --- 1. شاشة الترحيب (Boot Screen) --- */
-        #boot-screen {
-            position: fixed; top:0; left:0; width:100%; height:100%;
-            background: #000; z-index: 10000; display: flex;
-            flex-direction: column; justify-content: center; align-items: center;
-            color: var(--text-gold); text-align: center;
-        }
-
-        .crt-noise { animation: turn-on 1.5s ease-out forwards; }
-        @keyframes turn-on {
-            0% { transform: scale(1, 0.001); filter: brightness(10); opacity: 1; }
-            50% { transform: scale(1, 0.001); filter: brightness(10); opacity: 1; }
-            100% { transform: scale(1, 1); filter: brightness(1); opacity: 1; }
-        }
-
-        #manifesto-text { max-width: 600px; padding: 30px; border: 1px solid var(--panel-amber); background: rgba(0,0,0,0.8); }
-
-        .accept-btn {
-            margin-top: 30px; padding: 15px 40px; background: transparent;
-            color: var(--text-gold); border: 2px solid var(--text-gold);
-            cursor: pointer; font-size: 1.2em; transition: 0.3s;
-        }
-        .accept-btn:hover { background: var(--text-gold); color: #000; }
-
-        /* --- 2. النظام الرئيسي (Main System) --- */
-        #main-system { display: none; height: 100vh; display: flex; flex-direction: column; }
-
-        header { border-bottom: 2px solid var(--border-heavy); background: #0a0800; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; }
-        .brand-zone { display: flex; align-items: center; gap: 20px; }
-        .bill-eye-logo { width: 60px; height: 60px; background: radial-gradient(circle, var(--text-gold) 10%, transparent 70%); border: 2px solid var(--panel-amber); clip-path: polygon(50% 0%, 0% 100%, 100% 100%); display: flex; justify-content: center; align-items: center; }
-        .bill-eye-logo::after { content: "👁"; font-size: 24px; color: #000; margin-top: 15px; }
-
-        .workspace { display: grid; grid-template-columns: 300px 1fr; flex: 1; overflow: hidden; }
-        .control-panel { border-right: 2px solid var(--border-heavy); background: var(--bg-panel); padding: 30px 20px; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; }
-        .nav-link { display: block; padding: 12px; background: transparent; color: var(--text-dim); border: 1px dashed var(--border-heavy); text-decoration: none; font-size: 1em; letter-spacing: 2px; cursor: pointer; transition: all 0.2s; text-align: left; font-family: inherit; }
-        .nav-link:hover, .nav-link.active { background: var(--panel-amber); color: #000; border-color: var(--text-gold); transform: scale(1.02); }
-
-        .content-area { padding: 40px; overflow-y: auto; background: #030200; position: relative; }
-        .tab-content { display: none; animation: fadeIn 0.4s; }
-        .tab-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        
-        .manifesto-box { border: 1px solid var(--border-heavy); padding: 20px; margin-bottom: 20px; line-height: 1.8; }
-        h2 { color: var(--text-gold); border-bottom: 2px dotted var(--panel-amber); padding-bottom: 10px; }
-    </style>
+    <title>بوابة بيل سايفير</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div id="boot-screen" class="crt-noise">
-        <div id="manifesto-text">
-            <h2>CIPHER_GLOBAL // ACCESS_PROTOCOL</h2>
-            <p>WE ARE THE ARCHITECTS OF THE NEW AGE. REALITY IS A CONSTRUCT SUBJECT TO OUR MODIFICATION. BY INITIALIZING THIS TERMINAL, YOU SURRENDER YOUR DATA TO THE WIRED.</p>
-            <button class="accept-btn" onclick="initializeSystem()">AGREE / INITIALIZE</button>
-        </div>
-    </div>
-
-    <div id="main-system">
-        <header>
-            <div class="brand-zone">
-                <div class="bill-eye-logo"></div>
-                <h1>CIPHER_GLOBAL</h1>
-            </div>
-            <div style="text-align: right; color: var(--text-dim);">SYSTEM: ONLINE</div>
-        </header>
-
-        <div class="workspace">
-            <aside class="control-panel">
-                <button class="nav-link" onclick="toggleTab('discover')">▲ DISCOVER</button>
-                <button class="nav-link" onclick="toggleTab('handbook')">▲ HANDBOOK</button>
-                <button class="nav-link" onclick="toggleTab('portfolio')">▲ PORTFOLIO</button>
-            </aside>
-            <main class="content-area">
-                <div id="discover" class="tab-content">
-                    <h2>THE MUSE</h2>
-                    <div class="manifesto-box">CIPHER GLOBAL IS NOT A COMPANY. IT IS AN INVASION. WE ARE REDEFINING EXISTENCE ONE PIXEL AT A TIME.</div>
-                </div>
-                <div id="handbook" class="tab-content">
-                    <h2>HANDBOOK</h2>
-                    <div class="manifesto-box">RULE #1: NEVER LOOK THE TRIANGLE IN THE EYE.</div>
-                </div>
-                <div id="portfolio" class="tab-content">
-                    <h2>PORTFOLIO</h2>
-                    <div class="manifesto-box">ASSIMILATING REALITY... DIMENSION 46'\\ STABLE.</div>
-                </div>
-            </main>
-        </div>
+    <div class="container">
+        <h1 class="glitch" data-text="أهلاً بك في البُعد الثالث">أهلاً بك في البُعد الثالث</h1>
+        <div class="eye"></div>
+        <p class="warning">الحقيقة هي وهم... والكون مجرد مزحة!</p>
+        <button onclick="revealTruth()">اكشف الحقيقة</button>
     </div>
 
     <script>
-        function initializeSystem() {
-            document.getElementById('boot-screen').style.display = 'none';
-            document.getElementById('main-system').style.display = 'flex';
-        }
-
-        function toggleTab(tabName) {
-            var target = document.getElementById(tabName);
-            var contents = document.getElementsByClassName("tab-content");
-            var links = document.getElementsByClassName("nav-link");
-            
-            var isActive = target.style.display === "block";
-
-            for(let c of contents) c.style.display = "none";
-            for(let l of links) l.classList.remove("active");
-
-            if(!isActive) {
-                target.style.display = "block";
-                event.currentTarget.classList.add("active");
-            }
+        function revealTruth() {
+            alert("بيل يراقبك من وراء الشاشة!");
+            document.body.style.backgroundColor = "#550000"; // تغيير اللون للدموي
         }
     </script>
 </body>
 </html>
+
+body {
+    background-color: #000;
+    color: #ffd700; /* أصفر بيل المميز */
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    transition: background 0.5s;
+}
+
+.container {
+    border: 2px solid #ffd700;
+    padding: 50px;
+    box-shadow: 0 0 20px #ffd700;
+}
+
+.eye {
+    width: 100px;
+    height: 60px;
+    background: #ffd700;
+    border-radius: 50%;
+    margin: 20px auto;
+    animation: blink 3s infinite;
+}
+
+@keyframes blink {
+    0%, 90%, 100% { transform: scaleY(1); }
+    95% { transform: scaleY(0.1); }
+}
+
+button {
+    background: #000;
+    color: #ffd700;
+    border: 1px solid #ffd700;
+    padding: 10px 20px;
+    cursor: pointer;
+}
