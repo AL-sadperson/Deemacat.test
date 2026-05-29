@@ -2,23 +2,18 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>بوابة بيل سايفير</title>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <title>مخطوطة بيل سايفير</title>
 </head>
 <body>
-    <div class="container">
-        <h1 class="glitch" data-text="أهلاً بك في البُعد الثالث">أهلاً بك في البُعد الثالث</h1>
-        <div class="eye"></div>
-        <p class="warning">الحقيقة هي وهم... والكون مجرد مزحة!</p>
-        <button onclick="revealTruth()">اكشف الحقيقة</button>
+    <div class="glitch-container">
+        <h1 class="glitch" data-text="مرحباً بك في البُعد الملعون">مرحباً بك في البُعد الملعون</h1>
+        <div class="bill-eye"></div>
+        <p class="cipher-text">تذكر: الواقع وهم، الكون مسرحية، اشترِ الذهب!</p>
+        <button id="chaos-btn">افتح البوابة</button>
     </div>
 
-    <script>
-        function revealTruth() {
-            alert("بيل يراقبك من وراء الشاشة!");
-            document.body.style.backgroundColor = "#550000"; // تغيير اللون للدموي
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
-
