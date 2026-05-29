@@ -3,282 +3,287 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CLASSIFIED // CASE FILE</title>
+    <title>SYSTEM // ARCHIVE</title>
     <style>
-        /* إعدادات الخلفية لتشبه سطح المكتب */
+        /* إعدادات النظام الرقمي (الخلفية والشاشة) */
         body {
-            background-color: #1a1a1a;
+            background-color: #050505;
+            color: #00ff00; /* لون أخضر كلاسيكي مثل الشاشات القديمة */
+            font-family: 'Courier New', Courier, monospace;
             margin: 0;
-            padding: 40px 20px;
+            padding: 0;
             display: flex;
-            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
         }
 
-        /* حاوية الورقة (الملف السري) */
-        .document {
-            background-color: #f4f1ea; /* لون ورق قديم */
-            width: 100%;
-            max-width: 850px;
-            padding: 40px 50px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-            font-family: 'Courier New', Courier, monospace; /* خط الآلة الكاتبة */
-            color: #111;
-            position: relative;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.03"><rect width="100" height="100" fill="none"/><circle cx="50" cy="50" r="40" stroke="%23000" stroke-width="2"/></svg>'); /* تأثير نسيج خفيف */
-        }
-
-        /* الترويسة العلوية */
-        .header {
-            text-align: center;
-            border-bottom: 3px solid #111;
-            padding-bottom: 15px;
-            margin-bottom: 30px;
-        }
-
-        .header h1 {
-            margin: 0;
-            font-size: 2.5em;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-        }
-
-        .header .warning {
-            font-size: 0.9em;
-            font-weight: bold;
-            margin-top: 10px;
-            text-transform: uppercase;
-        }
-
-        /* شبكة المعلومات (الجدول والصورة) */
-        .info-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        /* جدول البيانات */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            border: 2px solid #111;
-        }
-
-        th, td {
-            border: 1px solid #111;
-            padding: 8px 12px;
-            text-align: left;
-            font-size: 0.9em;
-        }
-
-        th {
-            background-color: rgba(0, 0, 0, 0.05);
-            width: 35%;
-            text-transform: uppercase;
-        }
-
-        /* حاوية الصورة الملصقة */
-        .photo-container {
-            position: relative;
-            background: #e0e0e0;
-            border: 1px solid #999;
-            height: 250px;
+        /* القائمة الجانبية (Terminal Style) */
+        .sidebar {
+            width: 300px;
+            border-right: 2px dashed #00ff00;
+            padding: 20px;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+            flex-direction: column;
+            background-color: #000;
+            box-shadow: inset -5px 0 15px rgba(0, 255, 0, 0.1);
         }
 
-        .photo-placeholder {
-            color: #666;
-            font-size: 0.8em;
-            text-align: center;
-        }
-
-        /* الشريط اللاصق (Tape) */
-        .tape {
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%) rotate(-2deg);
-            width: 80px;
-            height: 25px;
-            background-color: rgba(255, 255, 255, 0.6);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            z-index: 10;
-        }
-
-        /* النصوص والمحتوى */
-        .content h3 {
-            border-bottom: 1px solid #111;
-            padding-bottom: 5px;
-            margin-top: 30px;
+        .sidebar h2 {
             text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 1px solid #00ff00;
+            padding-bottom: 10px;
+            margin-top: 0;
         }
 
-        .content p {
-            line-height: 1.6;
-            font-size: 0.95em;
-            text-align: justify;
-        }
-
-        /* الكلمات المشفرة / المحذوفة (Redacted) */
-        .redacted {
-            background-color: #111;
-            color: #111; /* جعل النص بنفس لون الخلفية لإخفائه تماماً */
-            padding: 0 5px;
-            display: inline-block;
-            user-select: none; /* منع تحديد النص */
-        }
-
-        /* الختم السري (Stamp) */
-        .stamp {
-            position: absolute;
-            top: 50px;
-            right: 40px;
-            color: #c1121f;
-            border: 4px solid #c1121f;
-            font-size: 2em;
-            font-weight: bold;
-            padding: 5px 15px;
-            transform: rotate(-15deg);
-            opacity: 0.8;
-            letter-spacing: 4px;
-            pointer-events: none; /* لمنع تفاعل الماوس معه */
-        }
-
-        /* الملاحظات المكتوبة بخط اليد */
-        .handwriting {
-            font-family: 'Brush Script MT', cursive;
-            color: #2b2b2b;
-            font-size: 1.5em;
-            transform: rotate(-2deg);
-            margin-top: 20px;
-        }
-
-        /* البصمات (وهمية) */
-        .fingerprints {
-            margin-top: 40px;
+        .profile-box {
+            border: 1px solid #00ff00;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 0.85em;
             display: flex;
-            gap: 20px;
+            gap: 10px;
         }
 
-        .print-box {
-            width: 80px;
-            height: 100px;
-            border: 1px dashed #666;
+        .profile-pic {
+            width: 50px;
+            height: 50px;
+            border: 1px solid #00ff00;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 0.7em;
-            color: #888;
+            text-align: center;
         }
 
-        /* التجاوب مع الهواتف */
-        @media (max-width: 768px) {
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-            .document {
-                padding: 20px;
-            }
-            .stamp {
-                font-size: 1.5em;
-                top: 20px;
-                right: 10px;
-            }
+        .nav-links {
+            list-style: none;
+            padding: 0;
         }
+
+        .nav-links li {
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .nav-links li:hover {
+            background-color: #00ff00;
+            color: #000;
+            padding-left: 10px;
+        }
+
+        .system-status {
+            margin-top: auto;
+            font-size: 0.8em;
+            opacity: 0.7;
+        }
+
+        /* مساحة عرض الملف (الجانب الأيمن) */
+        .main-viewer {
+            flex: 1;
+            padding: 40px;
+            background-color: #111;
+            overflow-y: auto;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            /* تأثير خطوط الشاشة القديمة CRT */
+            background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 0, 0.03) 2px, rgba(0, 255, 0, 0.03) 4px);
+        }
+
+        /* -------------------------------------- */
+        /* تصميم الملف الورقي السري (Physical File) */
+        /* -------------------------------------- */
+        .paper-file {
+            background-color: #f4eedd; /* لون الورق القديم */
+            color: #1a1a1a;
+            width: 100%;
+            max-width: 800px;
+            padding: 50px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+            position: relative;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.04"><rect width="100" height="100" fill="none"/><circle cx="50" cy="50" r="40" stroke="%23000" stroke-width="2"/></svg>');
+        }
+
+        .stamp-red {
+            position: absolute;
+            top: 40px;
+            right: 30px;
+            color: #b00000;
+            border: 4px solid #b00000;
+            font-size: 1.8em;
+            font-weight: bold;
+            padding: 5px 15px;
+            transform: rotate(-8deg);
+            letter-spacing: 2px;
+            pointer-events: none;
+        }
+
+        .file-header {
+            border-bottom: 3px solid #1a1a1a;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .barcode {
+            font-family: 'Libre Barcode 39', monospace, sans-serif;
+            font-size: 2em;
+            letter-spacing: 5px;
+        }
+
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 2px solid #1a1a1a;
+            margin-bottom: 30px;
+        }
+
+        .info-table th, .info-table td {
+            border: 1px solid #1a1a1a;
+            padding: 10px;
+            text-align: left;
+            font-size: 0.9em;
+        }
+
+        .info-table th {
+            background-color: rgba(0,0,0,0.05);
+            width: 30%;
+        }
+
+        /* الصورة الملصقة بمشبك أو شريط */
+        .photo-clip {
+            float: right;
+            margin: 0 0 20px 20px;
+            background: #fff;
+            padding: 10px 10px 30px 10px;
+            border: 1px solid #ccc;
+            box-shadow: 2px 5px 10px rgba(0,0,0,0.3);
+            transform: rotate(3deg);
+            position: relative;
+            width: 180px;
+            height: 200px;
+        }
+
+        .paperclip {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            width: 15px;
+            height: 40px;
+            border: 2px solid #888;
+            border-radius: 10px;
+            background: transparent;
+            transform: rotate(-10deg);
+        }
+
+        .redacted {
+            background-color: #1a1a1a;
+            color: #1a1a1a;
+            padding: 0 4px;
+            user-select: none;
+        }
+
+        .handwritten {
+            font-family: 'Brush Script MT', cursive, sans-serif;
+            color: #333;
+            font-size: 1.4em;
+            transform: rotate(-2deg);
+            margin-top: 20px;
+        }
+
     </style>
 </head>
 <body>
 
-    <div class="document">
+    <div class="sidebar">
+        <h2>DATABASE LOG</h2>
         
-        <!-- الختم الأحمر -->
-        <div class="stamp">TOP SECRET</div>
-
-        <!-- الترويسة -->
-        <div class="header">
-            <h1 style="margin: 0; font-size: 1.2em; color: #555;">DEPARTMENT OF ANOMALOUS INVESTIGATIONS</h1>
-            <h1 style="margin-top: 10px;">CASE FILE: #849-B</h1>
-            <div class="warning">Only Authorised Personnel May Open This File.<br>Unauthorized access is strictly prohibited.</div>
-        </div>
-
-        <!-- شبكة المعلومات والصورة -->
-        <div class="info-grid">
+        <div class="profile-box">
+            <div class="profile-pic">NO<br>IMG</div>
             <div>
-                <table>
-                    <tr>
-                        <th>Subject Name:</th>
-                        <td><span class="redacted">John Doe</span> (Alias: "The Architect")</td>
-                    </tr>
-                    <tr>
-                        <th>Clearance Level:</th>
-                        <td>Level 4 (Restricted)</td>
-                    </tr>
-                    <tr>
-                        <th>Date of Birth:</th>
-                        <td>14/09/1984</td>
-                    </tr>
-                    <tr>
-                        <th>Location:</th>
-                        <td>Sector <span class="redacted">7G</span>, Sub-level 3</td>
-                    </tr>
-                    <tr>
-                        <th>Status:</th>
-                        <td><strong>CONTAINED</strong></td>
-                    </tr>
-                    <tr>
-                        <th>Incident Date:</th>
-                        <td>24th March, 2025</td>
-                    </tr>
-                </table>
-
-                <div class="handwriting">
-                    * Note: Subject exhibits unusual behavior when exposed to <span class="redacted">light</span>. Monitor closely. - Dr. H.
-                </div>
-            </div>
-
-            <!-- مكان الصورة -->
-            <div class="photo-container">
-                <div class="tape"></div>
-                <div class="photo-placeholder">
-                    [ ATTACH PHOTOGRAPH HERE ]<br>
-                    <span style="font-size: 0.8em;">#IMG-0943</span>
-                </div>
+                <div>USER: AGENT_X</div>
+                <div>CLEARANCE: LEVEL 4</div>
+                <div style="color: #ff0000;">> ENCRYPTED <</div>
             </div>
         </div>
 
-        <!-- الوصف والمحتوى -->
-        <div class="content">
-            <h3>Description</h3>
-            <p>
-                The subject was apprehended on the night of November 12th near the <span class="redacted">REDACTED</span> facility. 
-                Upon initial contact, operatives reported severe signal interference and visual distortions. 
-                Standard restraint protocols were ineffective; containment was only achieved after implementing Procedure <span class="redacted">110-Montauk</span>.
-            </p>
-            <p>
-                Interviews conducted by Dr. <span class="redacted">REDACTED</span> suggest the subject possesses knowledge regarding the structural integrity of the facility. When questioned about the events of 1998, the subject responded only with: "The architecture is already changing."
-            </p>
+        <ul class="nav-links">
+            <li>[ + ] INDEX.SYS</li>
+            <li style="background-color: #00ff00; color: #000; padding-left: 10px;">[ > ] CASE_FILE_849.DOC</li>
+            <li>[ + ] ANOMALY_LOGS</li>
+            <li>[ + ] MEDIA_ARCHIVE</li>
+            <li>[ - ] LOGOUT</li>
+        </ul>
 
-            <h3>Addendum 01</h3>
-            <p>
-                All physical contact requires Level 4 Hazmat clearance. Do not allow the subject access to any recording devices, analog or digital. As per Directive 4A, if the subject mentions <span class="redacted">the pale horizon</span>, terminate the interview immediately.
-            </p>
+        <div class="system-status">
+            <p>CONNECTION: SECURE</p>
+            <p>PROXY: ACTIVE</p>
+            <p>LAST LOGIN: 1998-07-23</p>
         </div>
+    </div>
 
-        <!-- البصمات -->
-        <div class="fingerprints">
-            <div class="print-box">[Thumb Print]</div>
-            <div class="print-box">[Index Print]</div>
-            <div style="align-self: flex-end; margin-left: auto; font-size: 0.8em; color: #555;">
-                AUTHORIZED SIGNATURE: ____________________
+    <div class="main-viewer">
+        
+        <div class="paper-file">
+            <div class="stamp-red">CONFIDENTIAL</div>
+
+            <div class="file-header">
+                <div>
+                    <h1 style="margin: 0; font-size: 1.8em;">DEPARTMENT OF TRUTH</h1>
+                    <div style="font-size: 0.9em; margin-top: 5px;">RECORD ID: A5RDNOMJ85</div>
+                </div>
+                <div class="barcode">|||| |||| || ||||||</div>
             </div>
+
+            <div class="photo-clip">
+                <div class="paperclip"></div>
+                <div style="width: 100%; height: 100%; background: #ccc; display: flex; align-items: center; justify-content: center; color: #555; font-size: 0.8em; text-align: center;">
+                    [ SUBJECT PHOTO ]<br>Missing
+                </div>
+            </div>
+
+            <table class="info-table">
+                <tr>
+                    <th>SUBJECT NAME:</th>
+                    <td><span class="redacted">Lain Iwakura</span></td>
+                </tr>
+                <tr>
+                    <th>LOCATION:</th>
+                    <td>Sector <span class="redacted">Wired</span></td>
+                </tr>
+                <tr>
+                    <th>STATUS:</th>
+                    <td><strong>UNKNOWN / AT LARGE</strong></td>
+                </tr>
+                <tr>
+                    <th>THREAT LEVEL:</th>
+                    <td>Classified</td>
+                </tr>
+            </table>
+
+            <div style="line-height: 1.6;">
+                <p>
+                    Initial reports indicate that the subject has been communicating through the <span class="redacted">Navi system</span>. Physical manifestation in the real world is currently unstable.
+                </p>
+                <p>
+                    Operatives attempted to intercept the data stream on <span class="redacted">14th Aug</span>, but were met with severe psychological interference. The subject claims that "No matter where you go, everyone's connected."
+                </p>
+                <p>
+                    All further contact must be authorized by Director <span class="redacted">REDACTED</span>. Do not attempt to trace the signal back to its source.
+                </p>
+            </div>
+
+            <div class="handwritten">
+                * Is she even real anymore? We need to pull the plug on the servers before it spreads. - Dr. H
+            </div>
+
         </div>
 
     </div>
 
 </body>
 </html>
-
