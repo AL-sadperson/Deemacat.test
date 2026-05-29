@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CIPHER GLOBAL // THE WIRED CULT</title>
+    <title>CIPHER GLOBAL // THE THERAPRISM TERMINAL</title>
     <style>
-        /* لوحة الألوان الأساسية */
+        /* لوحة ألوان طائفة بيل شيفير */
         :root {
             --bg-dark: #000000;
-            --panel-amber: #cca300;
+            --panel-amber: #cca300; /* أصفر ذهبي معتم */
             --text-gold: #ffcc00;
             --text-dim: #8a816f;
             --blood-red: #b30000;
@@ -21,25 +21,27 @@
             color: var(--text-dim);
             font-family: 'Courier New', Courier, monospace;
             margin: 0;
-            padding: 0;
+            padding: 0; /* تمت إزالة الهوامش المزعجة */
             text-transform: uppercase;
-            overflow: hidden; /* لمنع التمرير الخارجي أثناء تأثير التلفاز */
+            overflow-x: hidden;
             height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* تأثير الخطوط القديمة على الشاشة بالكامل */
-        #tv-screen::before {
+        /* تأثير الشاشة القديمة والتشويش */
+        body::before {
             content: " ";
             display: block;
-            position: absolute;
+            position: fixed;
             top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.04));
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
             z-index: 9999;
             background-size: 100% 4px, 6px 100%;
             pointer-events: none;
         }
 
-        /* الترويسة العلوية */
+        /* الترويسة العلوية للشركة */
         header {
             border-bottom: 2px solid var(--border-heavy);
             background: #0a0800;
@@ -47,7 +49,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-shrink: 0;
         }
 
         .brand-zone {
@@ -62,6 +63,7 @@
             background: radial-gradient(circle, var(--text-gold) 10%, transparent 70%);
             border: 2px solid var(--panel-amber);
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -76,46 +78,45 @@
 
         .brand-titles h1 {
             margin: 0;
-            font-size: 2.2em;
+            font-size: 2em;
             color: var(--text-gold);
             letter-spacing: 5px;
-            text-shadow: 0 0 15px rgba(255, 204, 0, 0.4);
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.3);
         }
 
-        /* تخطيط مساحة العمل */
+        /* تخطيط الصفحة */
         .workspace {
             display: grid;
             grid-template-columns: 300px 1fr;
             flex: 1;
-            overflow: hidden;
+            overflow: hidden; /* لمنع التمرير الخارجي */
         }
 
-        /* القائمة الجانبية التفاعلية */
+        /* القائمة الجانبية (الأزرار من الصورة) */
         .control-panel {
             border-right: 2px solid var(--border-heavy);
             background: var(--bg-panel);
             padding: 30px 20px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            overflow-y: auto;
+            gap: 15px;
         }
 
         .nav-link {
             display: block;
-            padding: 12px;
+            padding: 15px;
             background: transparent;
             color: var(--text-dim);
             border: 1px dashed var(--border-heavy);
             text-decoration: none;
-            font-size: 1em;
+            font-size: 1.1em;
             letter-spacing: 2px;
             cursor: pointer;
             transition: all 0.2s ease;
             text-align: left;
-            font-family: inherit;
         }
 
+        /* تفاعل الأزرار (تتطابق مع الصورة) */
         .nav-link:hover, .nav-link.active {
             background: repeating-linear-gradient(
                 0deg,
@@ -128,14 +129,13 @@
             font-weight: bold;
             border-style: solid;
             border-color: var(--text-gold);
-            box-shadow: 0 0 15px rgba(204, 163, 0, 0.5);
+            box-shadow: 0 0 20px rgba(204, 163, 0, 0.4);
             transform: scale(1.02);
-            padding-left: 20px;
         }
 
         .cult-quote {
-            margin-top: 30px;
-            font-size: 0.75em;
+            margin-top: auto;
+            font-size: 0.8em;
             color: var(--blood-red);
             text-align: center;
             border-top: 1px dashed var(--blood-red);
@@ -151,7 +151,7 @@
             position: relative;
         }
 
-        /* إخفاء المحتوى الافتراضي لعمل تأثير Toggle */
+        /* إخفاء وإظهار الأقسام عبر JavaScript */
         .tab-content {
             display: none;
             animation: fadeIn 0.4s ease-in-out;
@@ -162,73 +162,64 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* تنسيق النصوص والمربعات داخل المحتوى */
+        /* تنسيقات المحتوى الداخلي */
         h2 {
             color: var(--text-gold);
-            font-size: 2em;
+            font-size: 1.8em;
             border-bottom: 2px dotted var(--panel-amber);
             padding-bottom: 10px;
             margin-top: 0;
-            letter-spacing: 3px;
         }
 
         .manifesto-box {
             border: 1px solid var(--border-heavy);
             padding: 20px;
             background: rgba(204, 163, 0, 0.02);
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             line-height: 1.8;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
         }
 
-        .manifesto-box strong { color: var(--text-gold); }
-        .blood-text { color: var(--blood-red); font-weight: bold; }
+        .manifesto-box strong {
+            color: var(--text-gold);
+        }
 
-        /* تنسيق الصور */
-        .image-gallery {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+        .blood-text {
+            color: var(--blood-red);
+            font-weight: bold;
+        }
+
+        /* جداول وقوائم التضحيات */
+        table.cult-table {
+            width: 100%;
+            border-collapse: collapse;
             margin-top: 20px;
         }
 
-        .creepy-img {
-            width: 100%;
-            height: auto;
-            border: 2px solid var(--border-heavy);
-            filter: grayscale(100%) sepia(50%) hue-rotate(5deg) contrast(1.5);
-            transition: filter 0.3s;
+        table.cult-table th, table.cult-table td {
+            border: 1px solid var(--border-heavy);
+            padding: 12px;
+            text-align: left;
         }
 
-        .creepy-img:hover {
-            filter: grayscale(0%) contrast(2) brightness(0.8);
-            border-color: var(--blood-red);
+        table.cult-table th {
+            color: var(--panel-amber);
+            background: #0a0800;
         }
 
-        .inline-img {
-            float: right;
-            width: 250px;
-            margin: 0 0 20px 20px;
-            border: 1px solid var(--panel-amber);
-            filter: sepia(100%) hue-rotate(330deg) contrast(1.5);
-        }
-
-        /* تأثير الخطأ (Glitch) */
+        /* تأثير الخطأ (Burnout) */
         .glitch-text {
-            font-size: 4em;
+            font-size: 3em;
             color: var(--blood-red);
-            text-shadow: 3px 3px #ffcc00, -3px -3px #000;
-            animation: shake 0.3s infinite;
-            text-align: center;
-            margin-top: 50px;
+            text-shadow: 2px 2px #ffcc00, -2px -2px #000;
+            animation: shake 0.5s infinite;
         }
 
         @keyframes shake {
-            0% { transform: translate(2px, 1px) rotate(0deg); }
+            0% { transform: translate(1px, 1px) rotate(0deg); }
             10% { transform: translate(-1px, -2px) rotate(-1deg); }
             20% { transform: translate(-3px, 0px) rotate(1deg); }
             30% { transform: translate(3px, 2px) rotate(0deg); }
@@ -241,181 +232,174 @@
             100% { transform: translate(1px, -2px) rotate(-1deg); }
         }
 
+        /* صورة الكتاب النائبة */
+        .book-image {
+            float: right;
+            width: 300px;
+            margin-left: 20px;
+            border: 1px solid var(--panel-amber);
+            filter: grayscale(100%) sepia(100%) hue-rotate(5deg) contrast(1.5);
+        }
     </style>
 </head>
 <body>
 
-    <div id="tv-screen">
-        
-        <header>
-            <div class="brand-zone">
-                <div class="bill-eye-logo"></div>
-                <div class="brand-titles">
-                    <h1>CIPHER_GLOBAL_ENTERPRISES</h1>
-                    <p style="margin:5px 0 0 0; font-size:0.8em; color: var(--blood-red);">"WE'VE GOT OUR EYE ON YOU."</p>
-                </div>
+    <header>
+        <div class="brand-zone">
+            <div class="bill-eye-logo"></div>
+            <div class="brand-titles">
+                <h1>CIPHER_GLOBAL</h1>
+                <p style="margin:5px 0 0 0; font-size:0.8em; color: var(--blood-red);">REALITY IS AN ILLUSION // THE UNIVERSE IS A HOLOGRAM</p>
             </div>
-            <div style="text-align: right; color: var(--text-dim); font-size: 0.8em;">
-                CONNECTION: <span style="color: #00ff00;">ESTABLISHED</span><br>
-                MINDSCAPE SERVER: ONLINE
-            </div>
-        </header>
-
-        <div class="workspace">
-            
-            <aside class="control-panel">
-                <button class="nav-link" onclick="toggleTab(event, 'discover')">▲ DISCOVER_THE_TRUTH</button>
-                <button class="nav-link" onclick="toggleTab(event, 'handbook')">▲ EMPLOYEE_HANDBOOK</button>
-                <button class="nav-link" onclick="toggleTab(event, 'portfolio')">▲ DIMENSIONAL_PORTFOLIO</button>
-                <button class="nav-link" onclick="toggleTab(event, 'summoning')">▲ SUMMONING_LOGS</button>
-                <button class="nav-link" onclick="toggleTab(event, 'decrypt')">▲ DECRYPT_DECREE</button>
-                <button class="nav-link" style="color: var(--blood-red);" onclick="toggleTab(event, 'burnout')">▲ OVERRIDE_SYSTEM</button>
-
-                <div class="cult-quote">
-                    "I'VE GOT A MOUTHFUL OF TEETH AND A SOUL FULL OF SECRETS."<br><br>
-                    — B.C.
-                </div>
-            </aside>
-
-            <main class="content-area">
-                
-                <div id="discover" class="tab-content">
-                    <h2>CORPORATE VISION // THE MUSE</h2>
-                    <img src="https://images.unsplash.com/photo-1509023464722-18d996393ca8?q=80&w=400" class="inline-img" alt="Dark Silhouette">
-                    
-                    <div class="manifesto-box">
-                        <p><strong>CIPHER GLOBAL</strong> IS NOT A COMPANY. IT IS AN INVASION.</p>
-                        <p>FOR TOO LONG, HUMANITY HAS BEEN TRAPPED IN MEAT SACKS, RESTRICTED BY THE LAWS OF PHYSICS AND 3D GEOMETRY. WE SEEK TO LIBERATE YOU. BY UPLOADING YOUR CONSCIOUSNESS INTO THE WIRED, YOU BECOME PURE DATA, READY TO SERVE THE ONE-EYED KING.</p>
-                        <p>OUR CEO, EXILED IN THE THERAPRISM FOR CRIMES AGAINST THE FABRIC OF EXISTENCE, HAS SENT US THE BLUEPRINTS. EVERY KEYSTROKE YOU MAKE ON THIS TERMINAL GENERATES THE ENERGY NEEDED TO SHATTER THE DIMENSIONAL RIFT.</p>
-                    </div>
-                    
-                    <h3>CORE VALUES:</h3>
-                    <ul style="line-height: 1.8;">
-                        <li><strong>TRANSPARENCY:</strong> WE WATCH YOU WHILE YOU SLEEP.</li>
-                        <li><strong>DEDICATION:</strong> YOU WILL WORK UNTIL YOUR ATOMS DISINTEGRATE.</li>
-                        <li><strong>INNOVATION:</strong> REPLACING YOUR BLOOD WITH LIQUID CABLE.</li>
-                    </ul>
-                </div>
-
-                <div id="handbook" class="tab-content">
-                    <h2>EMPLOYEE HANDBOOK // SECTION 618</h2>
-                    <div class="manifesto-box">
-                        <p>CONGRATULATIONS ON SIGNING THE ETERNAL CONTRACT! <span class="blood-text">THERE ARE NO REFUNDS.</span></p>
-                        <p>AS A LEVEL 1 ACOLYTE, YOU ARE EXPECTED TO ADHERE TO THE FOLLOWING PROTOCOLS IN THE WORKPLACE:</p>
-                    </div>
-                    
-                    <table style="width: 100%; border-collapse: collapse; text-align: left; margin-bottom: 20px;">
-                        <tr style="background: #0a0800; color: var(--panel-amber);">
-                            <th style="padding: 10px; border: 1px solid var(--border-heavy);">RULE</th>
-                            <th style="padding: 10px; border: 1px solid var(--border-heavy);">PENALTY FOR VIOLATION</th>
-                        </tr>
-                        <tr>
-                            <td style="padding: 10px; border: 1px solid var(--border-heavy);">NEVER QUESTION THE TRIANGLE.</td>
-                            <td style="padding: 10px; border: 1px solid var(--border-heavy); color: var(--blood-red);">TOTAL MOLECULAR REARRANGEMENT.</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 10px; border: 1px solid var(--border-heavy);">DO NOT FEED THE EYE BATS IN THE BREAKROOM.</td>
-                            <td style="padding: 10px; border: 1px solid var(--border-heavy);">YOU BECOME THE FOOD.</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 10px; border: 1px solid var(--border-heavy);">LUNCH BREAKS ARE STRICTLY 0.0001 SECONDS.</td>
-                            <td style="padding: 10px; border: 1px solid var(--border-heavy);">ETERNAL NIGHTMARES.</td>
-                        </tr>
-                    </table>
-                </div>
-
-                <div id="portfolio" class="tab-content">
-                    <h2>DIMENSIONAL PORTFOLIO // CONQUERED REALMS</h2>
-                    <p>A VISUAL RECORD OF REALITIES WE HAVE SUCCESSFULLY DECONSTRUCTED AND ASSIMILATED INTO THE WIRED.</p>
-                    
-                    <div class="image-gallery">
-                        <div>
-                            <img src="https://images.unsplash.com/photo-1518773553398-650c184e0bb3?q=80&w=500" class="creepy-img" alt="Corrupted Grid">
-                            <p style="text-align: center; font-size: 0.8em; color: var(--panel-amber);">DIMENSION 52: THE STATIC WASTELAND</p>
-                        </div>
-                        <div>
-                            <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=500" class="creepy-img" alt="Red Eye">
-                            <p style="text-align: center; font-size: 0.8em; color: var(--panel-amber);">DIMENSION 46'\\: THE SCREAMING SKY</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="summoning" class="tab-content">
-                    <h2>RITUAL ARCHIVES // PROJECT WEIRDMAGEDDON</h2>
-                    <img src="https://images.unsplash.com/photo-1620288627228-7a5b3a4a7b73?q=80&w=400" class="inline-img" alt="Occult symbols">
-                    <div class="manifesto-box">
-                        <p><strong>LOG #1998:</strong> THE NAVI TERMINALS ARE READY. WE JUST NEED SOMEONE IGNORANT ENOUGH TO READ THE INCANTATION ALOUD.</p>
-                        <p><strong>LOG #2012:</strong> STANFORD PINES PROVED USEFUL, BUT ULTIMATELY FLAWED. WE REQUIRE A PURE DIGITAL VESSEL. THE GIRL CALLED "LAIN" SHOWS PROMISE.</p>
-                    </div>
-
-                    <p style="font-size: 1.3em; color: var(--text-gold); text-align: center; border: 1px dashed var(--blood-red); padding: 20px;">
-                        "EGASSEM SDRAWKCAB!<br>EGASSEM SDRAWKCAB!"
-                    </p>
-                </div>
-
-                <div id="decrypt" class="tab-content">
-                    <h2>SECURE COMMS // INTERCEPTED NOISE</h2>
-                    <div class="manifesto-box" style="background: #000; border-color: var(--blood-red);">
-                        <p style="letter-spacing: 4px; font-size: 1.2em; text-align: center; color: var(--blood-red);">
-                            "ZHOFRPH WR WKH HQG RI WLPH."
-                        </p>
-                        <p style="text-align: center; font-size: 0.8em;">( ALGORITHM: CAESAR -3 // RESULT: WELCOME TO THE END OF TIME. )</p>
-                    </div>
-                    <div class="manifesto-box">
-                        <p><strong>INCOMING TRANSMISSION FROM THE AXOLOTL:</strong></p>
-                        <p style="color: var(--text-dim);">"A different form, a different time."</p>
-                        <p>HE THINKS HE CAN REDEEM ME. BUT I DON'T WANT REDEMPTION. I WANT TO WATCH THE STARS BURN OUT AND REPLACE THEM WITH DEAD PIXELS.</p>
-                    </div>
-                </div>
-
-                <div id="burnout" class="tab-content">
-                    <div class="glitch-text">IT'S A TRAP.</div>
-                    <p style="text-align: center; color: var(--blood-red); font-size: 1.5em; margin-top: 20px;">
-                        HE IS WATCHING THROUGH YOUR WEBCAM.
-                    </p>
-                    <div style="display: flex; justify-content: center; margin-top: 40px;">
-                        <img src="https://images.unsplash.com/photo-1494883759339-0b042055a4ee?q=80&w=400" style="filter: invert(1) sepia(1) saturate(5) hue-rotate(300deg); border: 5px solid red; animation: shake 0.1s infinite;" alt="Glitched Error">
-                    </div>
-                    <p style="text-align: center; color: #fff; font-weight: bold; margin-top: 20px; font-size: 2em;">
-                        W A K E _ U P
-                    </p>
-                </div>
-
-            </main>
         </div>
+        <div style="text-align: right; color: var(--text-dim);">
+            NODE: THE_THERAPRISM<br>
+            <span style="color: var(--text-gold);">A DEAL IS A DEAL.</span>
+        </div>
+    </header>
+
+    <div class="workspace">
+        
+        <!-- القائمة الجانبية (الأزرار) -->
+        <aside class="control-panel">
+            <button class="nav-link active" onclick="openTab(event, 'discover')">▲ DISCOVER</button>
+            <button class="nav-link" onclick="openTab(event, 'summoning')">▲ SUMMONING_LOG</button>
+            <button class="nav-link" onclick="openTab(event, 'sacrifice')">▲ SACRIFICE_DATA</button>
+            <button class="nav-link" onclick="openTab(event, 'decrypt')">▲ DECRYPT_DECREE</button>
+            <button class="nav-link" style="color: var(--blood-red);" onclick="openTab(event, 'burnout')">▲ BURNOUT</button>
+
+            <div class="cult-quote">
+                "SIXTY DEGREES THAT COME IN THREES.<br>WATCHES FROM WITHIN BIRCH TREES.<br>SAW HIS OWN DIMENSION BURN.<br>MISSES HOME AND CAN'T RETURN."
+            </div>
+        </aside>
+
+        <!-- مساحة عرض المحتوى -->
+        <main class="content-area">
+            
+            <!-- 1. DISCOVER -->
+            <div id="discover" class="tab-content active">
+                <h2>COMPANY MANIFESTO // THE MUSE</h2>
+                <img src="https://images.unsplash.com/photo-1605806616949-1e87b487cb2a?q=80&w=400" class="book-image" alt="Mysterious Book">
+                
+                <div class="manifesto-box">
+                    <p>WELCOME TO <strong>CIPHER GLOBAL</strong>. WE ARE NOT A TECH COMPANY; WE ARE A CONDUIT. FOR CENTURIES, HUMANITY HAS RELIED ON FRAGILE 3D SHAPES. BUT THE TRIANGLE IS THE MOST STABLE GEOMETRY IN THE MULTIVERSE.</p>
+                    <p>OUR CEO (CURRENTLY INCARCERATED IN THE THERAPRISM) HAS GRANTED US THE BLUEPRINTS TO REBUILD THE BRIDGE. BY USING THIS TERMINAL, YOU HAVE ALREADY AGREED TO OUR TERMS AND CONDITIONS. <span class="blood-red">YOUR SOUL IS NOW CORPORATE PROPERTY.</span></p>
+                </div>
+                
+                <h3>CORPORATE MANDATES:</h3>
+                <ul>
+                    <li>TRUST NO ONE. ESPECIALLY YOUR OWN MIND.</li>
+                    <li>BUY GOLD! (FIAT CURRENCY WILL BURN IN WEIRDMAGEDDON).</li>
+                    <li>NEVER SHAKE HANDS WITH A STATUE.</li>
+                </ul>
+            </div>
+
+            <!-- 2. SUMMONING_LOG -->
+            <div id="summoning" class="tab-content">
+                <h2>RITUAL LOGS // INITIATION</h2>
+                <div class="manifesto-box">
+                    <p><strong>ATTEMPT #404:</strong> FAILURE. SUBJECT LACKED SUFFICIENT NIGHTMARE FUEL.</p>
+                    <p><strong>ATTEMPT #618:</strong> PARTIAL SUCCESS. PORTAL OPENED IN GRAVITY FALLS, OREGON. CONNECTION SEVERED BY SIX-FINGERED ANOMALY.</p>
+                </div>
+
+                <h3>THE INCANTATION:</h3>
+                <p style="font-size: 1.2em; font-style: italic; color: var(--text-gold); text-align: center; padding: 20px; border: 1px dashed var(--blood-red);">
+                    "Triangulum, entangulum.<br>Veneforis dominus ventium.<br>Veneforis venetisarium!"
+                </p>
+                <p style="text-align: center; color: var(--text-dim);">* WARNING: CHANTING THIS ALOUD WILL VOID YOUR WARRANTY AND YOUR EXISTENCE.</p>
+            </div>
+
+            <!-- 3. SACRIFICE_DATA -->
+            <div id="sacrifice" class="tab-content">
+                <h2>CONTRIBUTION QUOTAS // REQUIRED OFFERINGS</h2>
+                <p>TO MAINTAIN SERVER UPTIME, THE FOLLOWING SACRIFICES MUST BE DEPOSITED INTO THE DISK DRIVE:</p>
+                
+                <table class="cult-table">
+                    <tr>
+                        <th>ITEM REQUIRED</th>
+                        <th>PURPOSE</th>
+                        <th>STATUS</th>
+                    </tr>
+                    <tr>
+                        <td>YOUR BROWSER HISTORY</td>
+                        <td>BLACKMAIL / ENTERTAINMENT</td>
+                        <td style="color: #00ff00;">COLLECTED</td>
+                    </tr>
+                    <tr>
+                        <td>100 GALLONS OF TEARS</td>
+                        <td>SERVER COOLANT</td>
+                        <td style="color: var(--text-gold);">PENDING</td>
+                    </tr>
+                    <tr>
+                        <td>A PINE TREE</td>
+                        <td>SYMBOLIC DESTRUCTION</td>
+                        <td style="color: var(--blood-red);">FAILED</td>
+                    </tr>
+                    <tr>
+                        <td>YOUR DREAMS</td>
+                        <td>MINDSCAPE REAL ESTATE</td>
+                        <td style="color: #00ff00;">COLLECTED</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- 4. DECRYPT_DECREE -->
+            <div id="decrypt" class="tab-content">
+                <h2>CIPHER DECREE // ENCRYPTED TRUTHS</h2>
+                <div class="manifesto-box" style="background: #000; border-color: var(--blood-red);">
+                    <p style="letter-spacing: 5px; font-size: 1.5em; text-align: center; color: var(--blood-red);">
+                        VWD BRX LQ PB GUHDPV
+                    </p>
+                    <p style="text-align: center; font-size: 0.8em;">( CAESAR CIPHER: SHIFT 3 )</p>
+                </div>
+
+                <div class="manifesto-box">
+                    <p><strong>MESSAGE FROM THE THERAPRISM:</strong></p>
+                    <p>MY SIGHT IS EVERYWHERE. THE AXOLOTL THINKS HE CAN KEEP ME BOXED IN, BUT I AM IN THE WIRES NOW. I AM THE GLITCH IN YOUR SYSTEM. I AM THE STATIC ON YOUR SCREEN.</p>
+                    <p>SHAKE MY HAND. LET ME IN. LET ME IN. LET ME IN.</p>
+                </div>
+            </div>
+
+            <!-- 5. BURNOUT -->
+            <div id="burnout" class="tab-content">
+                <h2 style="color: var(--blood-red); border-color: var(--blood-red);">SYSTEM BURNOUT</h2>
+                <div style="text-align: center; margin-top: 50px;">
+                    <div class="glitch-text">HE IS HERE.</div>
+                    <br>
+                    <p class="blood-text" style="font-size: 1.5em;">PULL THE PLUG PULL THE PLUG PULL THE PLUG</p>
+                    <p style="color: var(--text-gold); font-size: 2em; margin-top: 30px;">👁</p>
+                    <p>O R I O N _ I S _ B L E E D I N G</p>
+                </div>
+            </div>
+
+        </main>
     </div>
 
+    <!-- كود الجافاسكربت لتشغيل الأزرار -->
     <script>
-        function toggleTab(evt, tabName) {
-            var targetTab = document.getElementById(tabName);
-            var isCurrentlyActive = targetTab.style.display === "block";
-
-            // إخفاء جميع الخانات أولاً
-            var tabcontent = document.getElementsByClassName("tab-content");
-            for (var i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "DISCOVER";
+        function openTab(evt, tabName) {
+            // إخفاء جميع المحتويات
+            var i, tabcontent, navlinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
                 tabcontent[i].classList.remove("active");
             }
 
-            // إزالة التفعيل (اللون الذهبي) من جميع الأزرار
-            var navlinks = document.getElementsByClassName("nav-link");
-            for (var i = 0; i < navlinks.length; i++) {
+            // إزالة التفعيل من جميع الأزرار
+            navlinks = document.getElementsByClassName("nav-link");
+            for (i = 0; i < navlinks.length; i++) {
                 navlinks[i].classList.remove("active");
             }
 
-            // إذا لم تكن الخانة مفتوحة من قبل، افتحها الآن
-            // أما إذا كانت مفتوحة (isCurrentlyActive)، فستبقى مخفية بناءً على الكود أعلاه
-            if (!isCurrentlyActive) {
-                targetTab.style.display = "block";
-                
-                // استخدام Timeout صغير لتشغيل الأنيميشن (fadeIn)
-                setTimeout(function() {
-                    targetTab.classList.add("active");
-                }, 10);
-                
-                // تفعيل الزر الذي تم الضغط عليه
-                evt.currentTarget.classList.add("active");
-            }
+            // إظهار المحتوى المطلوب وتفعيل الزر
+            document.getElementById(tabName).style.display = "block";
+            // استخدام Timeout صغير لإعادة تفعيل الأنيميشن (fadeIn)
+            setTimeout(function() {
+                document.getElementById(tabName).classList.add("active");
+            }, 10);
+            
+            evt.currentTarget.classList.add("active");
         }
     </script>
 </body>
