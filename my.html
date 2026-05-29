@@ -387,37 +387,32 @@
         </div>
     </div>
 
-    <script>
-        function toggleTab(evt, tabName) {
-            var targetTab = document.getElementById(tabName);
-            var isCurrentlyActive = targetTab.style.display === "block";
 
-            // إخفاء جميع الخانات أولاً
-            var tabcontent = document.getElementsByClassName("tab-content");
-            for (var i = 0; i < tabcontent.length; i++) {
+    <!-- كود الجافاسكربت لتشغيل الأزرار -->
+    <script>
+        function openTab(evt, tabName) {
+            // إخفاء جميع المحتويات
+            var i, tabcontent, navlinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
                 tabcontent[i].style.display = "none";
                 tabcontent[i].classList.remove("active");
             }
 
-            // إزالة التفعيل (اللون الذهبي) من جميع الأزرار
-            var navlinks = document.getElementsByClassName("nav-link");
-            for (var i = 0; i < navlinks.length; i++) {
+            // إزالة التفعيل من جميع الأزرار
+            navlinks = document.getElementsByClassName("nav-link");
+            for (i = 0; i < navlinks.length; i++) {
                 navlinks[i].classList.remove("active");
             }
 
-            // إذا لم تكن الخانة مفتوحة من قبل، افتحها الآن
-            // أما إذا كانت مفتوحة (isCurrentlyActive)، فستبقى مخفية بناءً على الكود أعلاه
-            if (!isCurrentlyActive) {
-                targetTab.style.display = "block";
-                
-                // استخدام Timeout صغير لتشغيل الأنيميشن (fadeIn)
-                setTimeout(function() {
-                    targetTab.classList.add("active");
-                }, 10);
-                
-                // تفعيل الزر الذي تم الضغط عليه
-                evt.currentTarget.classList.add("active");
-            }
+            // إظهار المحتوى المطلوب وتفعيل الزر
+            document.getElementById(tabName).style.display = "block";
+            // استخدام Timeout صغير لإعادة تفعيل الأنيميشن (fadeIn)
+            setTimeout(function() {
+                document.getElementById(tabName).classList.add("active");
+            }, 10);
+            
+            evt.currentTarget.classList.add("active");
         }
     </script>
 </body>
